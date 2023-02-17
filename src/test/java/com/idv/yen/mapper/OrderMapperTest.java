@@ -1,16 +1,9 @@
-package com.idv.yen;
+package com.idv.yen.mapper;
 
-import org.junit.jupiter.api.Test;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
 @MapperScan("com.idv.yen.mapper")
-class ShoppingCartApplicationTests {
-
-    @Test
-    void contextLoads() {
-
-    }
-
+public class OrderMapperTest {
 }

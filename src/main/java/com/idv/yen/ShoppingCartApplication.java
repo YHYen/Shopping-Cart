@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-@MapperScan("com.idv.yen.dao")
+@MapperScan("com.idv.yen.mapper")
 public class ShoppingCartApplication {
 
     public static void main(String[] args) {
