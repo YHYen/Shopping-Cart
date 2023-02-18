@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products</title>
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    
+</head>
+<body>
+    <!-- header section starts -->
+    <div include-html="header.html"></div>
+    <!-- header section ends -->
+
+    <!-- products section starts -->
+    
+    <section class="products">
+
+        <h1 class="heading">all products</h1>
+        <div class="box-container">
+            <form action="" method="post" class="box">
+                <input type="hidden" name="productId" id="productId" value="$productId">
+                <img src="images/user ID Card/Xiu1.JPG" alt="" class="image">
+                <h3 id="productName" class="productName">Product Name</h3>
+
+                <div class="flex">
+                    <p class="price">NT<i class="fas fa-dollar-sign"></i> priceString </p>
+                    <input type="number" name="quantity" required maxlength="2" min="1" value="1" max="99" class="quantity">
+                </div>
+                <a href="#checkout.html" class="delete-btn">buy now</a>
+                <input type="button" value="add to cart" name="add_to_cart" class="btn">
+            </form>
+        </div>
+
+        <p class="empty">no products found!</p>
+        
+    </section>
+    
+    <!-- products section ends -->
+
+    <!-- footer section starts -->
+    <div include-html="footer.html"></div>
+    <!-- footer section ends -->
+
+    
+
+    <!-- loading js method -->
+    <script>
+        includeHTML();
+    </script>
+</body>
+</html>

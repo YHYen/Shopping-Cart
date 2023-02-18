@@ -1,10 +1,17 @@
 package com.idv.yen.domain;
 
+import java.math.BigDecimal;
+import java.sql.Timestamp;
+
 public class Order {
     private Integer id;
-    private String username;
-    private String password;
-    private Integer type;
+    private Integer userId;
+    private BigDecimal price;
+    private Integer payType;
+    private Integer paymentStatus;
+    private Integer shippingStatus;
+    private Timestamp createTime;
+    private Timestamp deliveryTime;
 
     public Integer getId() {
         return id;
@@ -14,37 +21,73 @@ public class Order {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
 
-    public String getPassword() {
-        return password;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
-    public Integer getType() {
-        return type;
+    public Integer getPayType() {
+        return payType;
     }
 
-    public void setType(Integer type) {
-        this.type = type;
+    public void setPayType(Integer payType) {
+        this.payType = payType;
+    }
+
+    public Integer getPaymentStatus() {
+        return paymentStatus;
+    }
+
+    public void setPaymentStatus(Integer paymentStatus) {
+        this.paymentStatus = paymentStatus;
+    }
+
+    public Integer getShippingStatus() {
+        return shippingStatus;
+    }
+
+    public void setShippingStatus(Integer shippingStatus) {
+        this.shippingStatus = shippingStatus;
+    }
+
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
+    public Timestamp getDeliveryTime() {
+        return deliveryTime;
+    }
+
+    public void setDeliveryTime(Timestamp deliveryTime) {
+        this.deliveryTime = deliveryTime;
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", type=" + type +
+                ", userId=" + userId +
+                ", price=" + price +
+                ", payType=" + payType +
+                ", paymentStatus=" + paymentStatus +
+                ", shippingStatus=" + shippingStatus +
+                ", createTime=" + createTime +
+                ", deliveryTime=" + deliveryTime +
                 '}';
     }
 }

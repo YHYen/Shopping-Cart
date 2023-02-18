@@ -2,9 +2,11 @@ package com.idv.yen.mapper;
 
 import com.idv.yen.domain.Product;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface ProductMapper {
     /**
      * query all products information

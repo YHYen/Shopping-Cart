@@ -4,9 +4,11 @@ import com.idv.yen.domain.Product;
 import com.idv.yen.mapper.ProductMapper;
 import com.idv.yen.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class ProductServiceImpl implements ProductService {
     final ProductMapper productMapper;
     @Autowired

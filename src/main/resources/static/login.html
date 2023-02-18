@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+</head>
+<body>
+    <!-- header section starts -->
+    <div include-html="header.html"></div>
+    <!-- header section ends -->
+
+    <!-- login section starts -->
+    <div id="app">
+        <div class="account-form-container">
+            <section class="account-form">
+                <form action="#" method="post">
+                    <h3> Welcome Back ! </h3>
+                    <p class="errMsg">{{errMsg}}</p>
+                    <input type="text" v-model="formData.username" required name="username" maxlength="16" placeholder="enter your account" class="input" @keyup.enter="submitForm">
+                    <input type="password" v-model="formData.password" required name="password" maxlength="30" placeholder="enter your password" class="input" @keyup.enter="submitForm">
+                    <p>don't have an account? <a href="register.html">register now</a></p>
+                    <input type="button" id="submit-btn" name="submit-btn" value="Login Now" class="btn" @click="submitForm">
+    
+                </form>
+            </section>
+        </div>
+    </div>
+    
+    <!-- login section ends -->
+
+    <!-- footer section starts -->
+    <div include-html="footer.html"></div>
+    <!-- footer section ends -->
+
+    
+
+    <!-- loading js method -->
+    <script>
+        includeHTML();
+
+        const {createApp} = Vue
+
+        createApp({
+            data() {
+                return {
+                    errMsg: "", 
+                    formData: {}, 
+                    rule: {
+                        username: [{required: true, message: "username is required info", trigger: 'blur'}], 
+                        password: [{required: true, message: "password is required info", trigger: 'blur'}]
+                    }
+                }
+            }, 
+            mounted() {
+            }, 
+            setup() {
+
+            }, 
+            methods: {
+                submitForm(event) {
+                    const _this = this;
+                    axios.post('/users/login', this.formData).then(function(response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            //3. Login successful and jump to the home page
+                            location.href = "/home.html";
+                        } else {
+                            //4. Login failed, show error meaage
+                            _this.errMsg = response.data.message;
+                            _this.formData = {};
+                        }
+                    });
+                }
+            }
+        }).mount('#app')
+
+    </script>
+
+
+</body>
+</html>

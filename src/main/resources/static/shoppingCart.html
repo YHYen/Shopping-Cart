@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    
+</head>
+<body>
+    <!-- header section starts -->
+    <div include-html="header.html"></div>
+    <!-- header section ends -->
+
+    <!-- products section starts -->
+    
+    <section class="products">
+
+        <h1 class="heading">Shopping Cart</h1>
+
+            <div class="order-list">
+                <h3 class="title">Total items</h3>
+    
+                <div class="flex">
+                    <img src="images/user ID Card/flower1.jpg" alt="">
+                    <div>
+                        <h3 class="name">Products name</h3>
+                        <p class="price">NT<i class="fas fa-dollar-sign"></i> 10000</p>
+                        
+                    </div>
+                </div>
+                <div class="flex">
+                    <img src="images/user ID Card/flower2.jpg" alt="">
+                    <div>
+                        <h3 class="name">Products name</h3>
+                        <p class="price">NT<i class="fas fa-dollar-sign"></i> 10000</p>
+                        
+                    </div>
+                </div>
+            </div>
+        
+        <p class="empty">Shopping Cart Is Empty</p> -->
+        
+        <div class="total">
+            <p>total cost : NT<i class="fas fa-dollar-sign"></i> <span>20000</span></p>
+            <a href="#" class="btn">checkout</a>
+            <form action="" method="post">
+                <input type="button" value="empty Cart" name="emptyCart" class="delete-btn">
+            </form>
+        </div>
+    </section>
+    
+    <!-- products section ends -->
+
+    <!-- footer section starts -->
+    <div include-html="footer.html"></div>
+    <!-- footer section ends -->
+
+    
+
+    <!-- loading js method -->
+    <script>
+        includeHTML();
+    </script>
+</body>
+</html>

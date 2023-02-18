@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    
+</head>
+<body>
+    <!-- header section starts -->
+    <div include-html="header.html"></div>
+    <!-- header section ends -->
+
+    
+    <!-- add Product section starts -->
+    <section class="add-product">
+        <form action="" method="post" enctype="multipart/form-data">
+            <h3>Product Details</h3>
+            <p>Product Name <span>*</span></p>
+            <input type="text" name="productName" required maxlength="50"
+            placeholder="enter product name" class="box">
+            <p>Product Price <span>*</span></p>
+            <input type="number" name="price" required maxlength="10" min="0"
+            max="9999999999" placeholder="enter product price" class="box">
+            <p>Product Image <span>*</span></p>
+            <input type="file" name="productImage" required accept="image/*" class="box">
+            <input type="submit" value="add product" name="addProduct" class="btn">
+        </form>
+
+        <form action="" method="post">
+            <img src="images/user ID Card/Xiu1.JPG" alt="" class="image">
+        </form>
+    </section>
+    
+
+    <!-- add Product section ends -->
+
+
+    <!-- footer section starts -->
+    <div include-html="footer.html"></div>
+    <!-- footer section ends -->
+
+    
+
+    <!-- loading js method -->
+    <script>
+        includeHTML();
+    </script>
+</body>
+</html>

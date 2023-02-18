@@ -1,11 +1,15 @@
 package com.idv.yen.domain;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private Integer id;
     private String username;
     private String password;
+    private String confirmPassword;
     private Integer type;
     private String phoneNumber;
+    private String email;
 
     public Integer getId() {
         return id;
@@ -31,6 +35,14 @@ public class User {
         this.password = password;
     }
 
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
     public Integer getType() {
         return type;
     }
@@ -47,14 +59,24 @@ public class User {
         this.phoneNumber = phoneNumber;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", confirmPassword='" + confirmPassword + '\'' +
                 ", type=" + type +
                 ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

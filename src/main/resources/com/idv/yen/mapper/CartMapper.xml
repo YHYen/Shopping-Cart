@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.idv.yen.mapper.CartMapper">
+    <!-- statement -->
+    <resultMap id="cartResultMap" type="com.idv.yen.domain.Cart">
+        <result column="user_id" property="userId" />
+        <result column="product_id" property="productId" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+</mapper>

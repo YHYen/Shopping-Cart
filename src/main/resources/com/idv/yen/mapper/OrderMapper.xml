@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.idv.yen.mapper.OrderMapper">
+    <!-- statement -->
+    <resultMap id="orderResultMap" type="com.idv.yen.domain.Order">
+        <result column="user_id" property="userId" />
+        <result column="pay_type" property="payType" />
+        <result column="payment_status" property="paymentStatus" />
+        <result column="shipping_status" property="shippingStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="delivery_time" property="deliveryTime" />
+    </resultMap>
+
+</mapper>

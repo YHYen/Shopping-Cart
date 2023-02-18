@@ -1,9 +1,11 @@
 package com.idv.yen.domain;
 
+import java.math.BigDecimal;
+
 public class Product {
     private Integer id;
     private String productName;
-    private Integer price;
+    private BigDecimal price;
     private Integer quantity;
     private Integer sellerId;
 
@@ -23,11 +25,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public Integer getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

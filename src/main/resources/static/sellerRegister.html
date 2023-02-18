@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Become A Seller</title>
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
+</head>
+
+<body>
+    <!-- header section starts -->
+    <div include-html="header.html"></div>
+    <!-- header section ends -->
+
+    <!-- login section starts -->
+    <section class="add-product">
+        <form action="login.html" method="post">
+            <h3> Become A Seller ! </h3>
+            <p>ID Photo <span>*</span></p>
+            <input type="file" name="idPhoto" required accept="image/*" class="box">
+            <input type="submit" value="apply to be a seller" name="submit" class="btn">
+        </form>
+
+        <form action="" method="post">
+            <img src="images/user ID Card/Xiu1.JPG" alt="" class="image">
+        </form>
+    </section>
+
+
+    <!-- login section ends -->
+
+    <!-- footer section starts -->
+    <div include-html="footer.html"></div>
+    <!-- footer section ends -->
+
+
+
+    <!-- loading js method -->
+    <script>
+        includeHTML();
+    </script>
+</body>
+
+</html>

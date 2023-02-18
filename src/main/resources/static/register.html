@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+
+    <!-- custom css file link -->
+    <link rel="stylesheet" href="css/style.css">
+    <!-- custom js file link -->
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    
+</head>
+<body>
+    <!-- header section starts -->
+    <div include-html="header.html"></div>
+    <!-- header section ends -->
+
+    <!-- login section starts -->
+
+    <div id="app">
+        <div class="account-form-container">
+            <section class="account-form">
+                <form action="login.html" method="post">
+                    <h3> Join us ! </h3>
+                    <p class="errMsg" :style="{color: msgColor}">{{errMsg}}</p>
+                    <input type="text" v-model="formData.username" required name="username" minlength="8" maxlength="16" placeholder="enter your account" class="input" @blur="checkUsername">
+                    <input type="email" v-model="formData.email" required name="email" maxlength="50" placeholder="enter your email" class="input">
+                    <input type="password" v-model="formData.password" required name="password" maxlength="30" placeholder="enter your password" class="input">
+                    <input type="password" v-model="formData.confirmPassword" required name="comfirm_password" maxlength="30" placeholder="comfirm your password" class="input">
+                    <p>already have an account? <a href="login.html">login now</a></p>
+                    <input type="button" id="submit-btn" name="submit-btn" value="Register" class="btn" @click="submitForm">
+                </form>
+            </section>
+        </div>
+    </div>
+
+    <!-- login section ends -->
+
+    <!-- footer section starts -->
+    <div include-html="footer.html"></div>
+    <!-- footer section ends -->
+
+    
+
+    <!-- loading js method -->
+    <script>
+        includeHTML();
+
+        const {createApp} = Vue
+
+        createApp({
+            data() {
+                return {
+                    errMsg: "", 
+                    msgColor: "red", 
+                    formData: {}
+                }
+            }, 
+            mounted() {
+                
+            }, 
+            setup() {
+
+            }, 
+            methods: {
+                submitForm(event) {
+                    const _this = this;
+                    axios.post('/users/register', this.formData).then(function(response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if(response.data.flag) {
+                            //3. Registration is successful, jump to the registration page, and display a success message
+                            location.href = "/login.html";
+                        } else {
+                            //4. Registration failed, show error message
+                            _this.errMsg = response.data.message;
+                            _this.formData.password = "";
+                            _this.formData.comfirmPassword = "";
+                        }
+                    });
+                }, 
+                checkUsername(event) {
+                    const _this = this;
+                    axios.get('/users/findUsername/' + this.formData.username).then(function(response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            _this.errMsg = response.data.message;
+                        } else {
+                            _this.msgColor = "#38944f";
+                            _this.errMsg = response.data.message;
+                            
+                        }
+                    });
+                }
+
+
+            }
+        }).mount('#app')
+
+    </script>
+</body>
+</html>

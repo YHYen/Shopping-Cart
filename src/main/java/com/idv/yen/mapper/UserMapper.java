@@ -2,9 +2,11 @@ package com.idv.yen.mapper;
 
 import com.idv.yen.domain.User;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 
+@Component
 public interface UserMapper {
 
     /**
@@ -25,7 +27,7 @@ public interface UserMapper {
      * */
     @Result(property = "phoneNumber", column = "phone_number")
     @Select("select " +
-            "   username, password, type, phone_number " +
+            "   id, username, password, type, phone_number " +
             "from " +
             "   tb_user " +
             "where " +
@@ -36,25 +38,27 @@ public interface UserMapper {
      * use username to query user id
      * @return Integer return the user id
      * */
+    @Result(property = "phoneNumber", column = "phone_number")
     @Select("select " +
-            "   id " +
+            "   id, username, password, type, phone_number " +
             "from " +
             "   tb_user " +
             "where " +
             "   username = #{username}")
-    Integer selectIdByUsername(String username);
+    User selectByUsername(String username);
 
     /**
      * use username and password to query user id
      * @return Integer return the user id
      * */
+    @Result(property = "phoneNumber", column = "phone_number")
     @Select("select " +
-            "   id" +
+            "   id, username, password, type, phone_number " +
             "from " +
             "   tb_user " +
             "where " +
             "   username = #{username} and password = #{password}")
-    Integer selectByUsernameAndPassword(String username, String password);
+    User selectByUsernameAndPassword(String username, String password);
 
     /**
      * add user to user table
@@ -64,7 +68,7 @@ public interface UserMapper {
     @Insert("insert into " +
             "   tb_user " +
             "values" +
-            "   (null, #{username}, #{password}, #{type}, #{phoneNumber})")
+            "   (null, #{username}, #{password}, #{type}, #{phoneNumber}, #{email})")
     int insertUser(User user);
 
 

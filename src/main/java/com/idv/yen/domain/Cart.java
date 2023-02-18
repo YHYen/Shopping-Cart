@@ -1,10 +1,13 @@
 package com.idv.yen.domain;
 
+import java.sql.Timestamp;
+
 public class Cart {
     private Integer id;
     private Integer userId;
     private Integer productId;
     private Integer quantity;
+    private Timestamp createTime;
 
     public Integer getId() {
         return id;
@@ -38,6 +41,14 @@ public class Cart {
         this.quantity = quantity;
     }
 
+    public Timestamp getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Timestamp createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public String toString() {
         return "Cart{" +
@@ -45,6 +56,7 @@ public class Cart {
                 ", userId=" + userId +
                 ", productId=" + productId +
                 ", quantity=" + quantity +
+                ", createTime=" + createTime +
                 '}';
     }
 }
