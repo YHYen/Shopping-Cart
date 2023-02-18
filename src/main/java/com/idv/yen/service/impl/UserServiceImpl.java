@@ -68,4 +68,24 @@ public class UserServiceImpl implements UserService {
     public List<User> selectAll() {
         return userMapper.selectAll();
     }
+
+    /**
+     * check if the user login information matches
+     * @return Boolean whether the user login successful
+     * */
+    @Override
+    public Boolean loginSuccessful(String username, String password) {
+        return userMapper.selectByUsernameAndPassword(username, password) != null;
+    }
+
+    /**
+     * check if username already exits
+     * @return Boolean whether the username already exists
+     * */
+    @Override
+    public Boolean usernameExists(String username) {
+        return userMapper.selectIdByUsername(username) == null;
+    }
+
+
 }

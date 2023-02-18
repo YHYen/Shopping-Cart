@@ -13,4 +13,6 @@ public interface UserService {
     Boolean delete(Integer id);
     User selectById(Integer id);
     List<User> selectAll();
+    Boolean loginSuccessful(String username, String password);
+    Boolean usernameExists(String username);
 }

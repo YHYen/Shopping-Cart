@@ -2,7 +2,7 @@ package com.idv.yen.domain;
 
 public class Product {
     private Integer id;
-    private String ProductName;
+    private String productName;
     private Integer price;
     private Integer quantity;
     private Integer sellerId;
@@ -16,11 +16,11 @@ public class Product {
     }
 
     public String getProductName() {
-        return ProductName;
+        return productName;
     }
 
     public void setProductName(String productName) {
-        ProductName = productName;
+        this.productName = productName;
     }
 
     public Integer getPrice() {
@@ -51,7 +51,7 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", ProductName='" + ProductName + '\'' +
+                ", ProductName='" + productName + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", sellerId=" + sellerId +

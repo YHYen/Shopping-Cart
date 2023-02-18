@@ -33,17 +33,28 @@ public interface UserMapper {
     User selectById(Integer id);
 
     /**
-     * use username to query user information
-     * @return User return the user information and encapsulate it into User object
+     * use username to query user id
+     * @return Integer return the user id
      * */
-    @Result(property = "phoneNumber", column = "phone_number")
     @Select("select " +
-            "   password" +
+            "   id " +
             "from " +
             "   tb_user " +
             "where " +
             "   username = #{username}")
-    User selectPasswordByUsername(String username);
+    Integer selectIdByUsername(String username);
+
+    /**
+     * use username and password to query user id
+     * @return Integer return the user id
+     * */
+    @Select("select " +
+            "   id" +
+            "from " +
+            "   tb_user " +
+            "where " +
+            "   username = #{username} and password = #{password}")
+    Integer selectByUsernameAndPassword(String username, String password);
 
     /**
      * add user to user table
