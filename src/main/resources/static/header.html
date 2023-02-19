@@ -7,81 +7,95 @@
     <title>header</title>
 
     <!-- custume css file link -->
-    <link rel="stylesheet" href="css/style.css">
-        <!-- custom js file link -->
-        <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
-        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <link rel="stylesheet" href="css/style.css>">
+    <!-- custom js file link -->
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
 <body>
-    
-    <!-- header section starts -->
-    <header class="header">
 
-        <input type="checkbox" name="" id="toggler">
-        <label for="toggler" class="fas fa-bars"></label>
-        
-        <a href="#" class="logo"> LOGO<span>.</span></a>
-        <div id="app">
-            <nav class="navbar">
-                <ul>
-                    <li><a href="Products.html">Products</a></li>
-                    <li><a href="#Shopping Cart">Shopping Cart</a></li>
-                    <li id="store"><a href="#store">Store <icons class="fa fa-angle-double-down"></icons></a>
-                        <ul>
-                            <a href="#Add Product">Add Product</a>
-                        </ul>
-                    </li>
-                    <li><a href="#My_Order">My Order</a></li>
-                    <li><a href="login.html" id="loginBtn">Login <icons class="fa fa-sign-in"></icons></a></li>
-                    <li><a href="#" class="username" id="username">{{username}} <icons class="fa fa-user"></icons></a>
-                        <ul id="userSubList">
-                            <li><a href="#My Account">My Account</a></li>
-                            <li><a href="#Track List">Track List</a></li>
-                            <li><a href="sellerRegister.html">Become<br>a seller</a></li>
-                            <li><a href="#" id="logoutBtn" onclick="logout()">Logout <icons class="fa fa-sign-out"></icons></a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-        
+<!-- header section starts -->
+<header class="header">
 
-    </header>
-    <!-- header section ends -->
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
 
-    <script>
-        const {createApp} = Vue
+    <a href="#" class="logo"> LOGO<span>.</span></a>
+    <div id="app">
+        <nav class="navbar">
+            <ul>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="#Shopping Cart">Shopping Cart</a></li>
+                <li id="store"><a href="#store" class="store">Store
+                    <icons class="fa fa-angle-double-down"></icons>
+                </a>
+                    <ul>
+                        <a href="#Add Product">Add Product</a>
+                    </ul>
+                </li>
+                <li><a href="#My_Order">My Order</a></li>
+                <li><a href="login.html" id="loginBtn">Login
+                    <icons class="fa fa-sign-in"></icons>
+                </a></li>
+                <li><a href="#" class="username" id="username">{{username}}
+                    <icons class="fa fa-user"></icons>
+                </a>
+                    <ul id="userSubList">
+                        <li><a href="#My Account">My Account</a></li>
+                        <li><a href="#Track List">Track List</a></li>
+                        <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                        <li><a href="#" id="logoutBtn" @click="logout">Logout
+                            <icons class="fa fa-sign-out"></icons>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </div>
 
-createApp({
-    data() {
-        return {
-            username: "Username"
-        }
-    }, 
-    mounted() {
-        axios.
-    }, 
-    setup() {
 
-    }, 
-    methods: {
-        submitForm(event) {
-            const _this = this;
-            axios.post('/users/login', this.formData).then(function(response) {
-                //1. get response data
-                //2. determine whether flag is true
-                if (response.data.flag) {
-                    //3. Login successful and jump to the home page
+</header>
+<!-- header section ends -->
+
+<script>
+    const {createApp} = Vue
+
+    createApp({
+        data() {
+            return {
+                username: "Username"
+            }
+        },
+        mounted() {
+            this.isLogin();
+        },
+        setup() {
+
+        },
+        methods: {
+            logout(event) {
+                axios.get('/users/logout').then(function (response) {
+                    document.getElementById("username").style.display = 'none';
+                    document.getElementById("userSubList").style.display = 'none';
+                    document.getElementById("loginBtn").style.display = 'block';
                     location.href = "/home.html";
-                } else {
-                    //4. Login failed, show error meaage
-                    _this.errMsg = response.data.message;
-                    _this.formData = {};
-                }
-            });
+                });
+            },
+            isLogin() {
+                const _this = this;
+                axios.get('/users/isLogin').then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        _this.username = response.data.data.username;
+                    } else {
+                        _this.username = "Username";
+                    }
+                });
+                return;
+            }
         }
-    }
-}).mount('#app')
-    </script>
+    }).mount('#app')
+</script>
 </body>
 </html>

@@ -16,7 +16,7 @@ public class UserInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object handler) throws Exception {
-        if (userService.isLogin(httpServletRequest.getSession()) == null) {
+        if (!userService.isLogin(httpServletRequest.getSession()).getFlag()) {
             httpServletResponse.sendRedirect("/login.html");
             return false;
         }

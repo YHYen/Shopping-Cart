@@ -150,7 +150,7 @@ header .navbar ul li ul{
     width: 175px;
     /* top: 2.45rem; */
     background: var(--black);
-    display: none;
+    display: block;
     transform: scaleY(0);
     transform-origin: top;
     transition: .2s ease-out;
@@ -172,13 +172,13 @@ header .navbar ul li:hover > ul{
     transform: scaleY(1);
     transform: .2s ease-out;
     
-}
+}   
 
 header .navbar ul li .username{
     display: none;
 }
 
-header .navbar ul #addProduct{
+header .navbar ul .store{
     display: none;
 }
 

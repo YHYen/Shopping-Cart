@@ -1,6 +1,6 @@
 package com.idv.yen.controller;
 
-import com.idv.yen.controller.Utils.Result;
+import com.idv.yen.service.Utils.Result;
 import com.idv.yen.domain.Product;
 import com.idv.yen.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

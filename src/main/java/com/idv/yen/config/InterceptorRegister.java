@@ -14,7 +14,7 @@ import java.util.List;
 /**
  * register interceptor
  * */
-@Configuration
+//@Configuration
 public class InterceptorRegister implements WebMvcConfigurer {
 
     private UserInterceptor userInterceptor;
@@ -35,19 +35,20 @@ public class InterceptorRegister implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
         List<String> pathPattern = new ArrayList<>();
-        pathPattern.add("/style.css");
-        pathPattern.add("/axiosProcess.js");
-        pathPattern.add("/script.js");
+        pathPattern.add("/css/style.css");
+        pathPattern.add("/js/script.js");
         pathPattern.add("/footer.html");
         pathPattern.add("/header.html");
         pathPattern.add("/home.html");
         pathPattern.add("/login.html");
         pathPattern.add("/Products.html");
         pathPattern.add("/register.html");
-        pathPattern.add("/isLogin");
-        pathPattern.add("/register");
-        pathPattern.add("/findUsername");
-        pathPattern.add("/login");
-        interceptorRegistry.addInterceptor(userInterceptor).addPathPatterns("/**").excludePathPatterns(pathPattern).order(1);
+        pathPattern.add("/users/isLogin");
+        pathPattern.add("/users/register");
+        pathPattern.add("/users/findUsername/**");
+        pathPattern.add("/users/login");
+        // temp path
+        pathPattern.add("/images/product");
+        interceptorRegistry.addInterceptor(userInterceptor).excludePathPatterns(pathPattern).order(1);
     }
 }

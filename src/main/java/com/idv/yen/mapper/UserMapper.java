@@ -13,9 +13,9 @@ public interface UserMapper {
      * query all user information
      * @return List<User> return all user information and save them in list
      * */
-    @Result(property = "phoneNumber", column = "phone_number")
+    @Result(column = "phone_number", property = "phoneNumber")
     @Select("select " +
-            "   id, username, password, type, phone_number " +
+            "   id, username, password, type, phone_number, email " +
             "from " +
             "   tb_user ")
     List<User> selectAll();
@@ -25,9 +25,9 @@ public interface UserMapper {
      * @param id user id
      * @return User return the user information and encapsulate it into User object
      * */
-    @Result(property = "phoneNumber", column = "phone_number")
+    @Result(column = "phone_number", property = "phoneNumber")
     @Select("select " +
-            "   id, username, password, type, phone_number " +
+            "   id, username, password, type, phone_number, email " +
             "from " +
             "   tb_user " +
             "where " +
@@ -35,12 +35,12 @@ public interface UserMapper {
     User selectById(Integer id);
 
     /**
-     * use username to query user id
+     * use username to query user information
      * @return Integer return the user id
      * */
-    @Result(property = "phoneNumber", column = "phone_number")
+    @Result(column = "phone_number", property = "phoneNumber")
     @Select("select " +
-            "   id, username, password, type, phone_number " +
+            "   id, username, password, type, phone_number, email " +
             "from " +
             "   tb_user " +
             "where " +
@@ -48,12 +48,12 @@ public interface UserMapper {
     User selectByUsername(String username);
 
     /**
-     * use username and password to query user id
+     * use username and password to query user information
      * @return Integer return the user id
      * */
     @Result(property = "phoneNumber", column = "phone_number")
     @Select("select " +
-            "   id, username, password, type, phone_number " +
+            "   id, username, password, type, phone_number, email " +
             "from " +
             "   tb_user " +
             "where " +

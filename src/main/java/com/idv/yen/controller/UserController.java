@@ -1,16 +1,13 @@
 package com.idv.yen.controller;
 
-import com.idv.yen.controller.Utils.CheckCodeUtil;
-import com.idv.yen.controller.Utils.Result;
+import com.idv.yen.service.Utils.Result;
 import com.idv.yen.domain.User;
 import com.idv.yen.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -24,60 +21,78 @@ public class UserController {
     }
 
     /**
+     * user register
+     * @param user object containing user register information
+     * @return Result whether the user register successful and error message
+     * */
+    @PostMapping("/register")
+    public Result register(@RequestBody User user) {
+        return userService.register(user);
+    }
+
+    /**
+     * check if username already exits
+     * @param username username to register
+     * @return Result whether the username already exists and error message
+     */
+    @GetMapping("/findUsername/{username}")
+    public Result usernameExists(@PathVariable("username") String username) {
+        return userService.usernameExists(username);
+    }
+
+    /**
      * user login
-     * @param user
-     * @param httpServletRequest
-     * @return Result
+     * @param user object containing user login information
+     * @param httpServletRequest request object, used to process session
+     * @return Result whether the user login successful and error message
      * */
     @PostMapping("/login")
     public Result login(@RequestBody User user, HttpServletRequest httpServletRequest) {
-        if(userService.login(user.getUsername(), user.getPassword())) {
-            httpServletRequest.getSession().setAttribute(SESSION_NAME, user);
-            return new Result(true);
+        // check if the user login information matches
+        Result result = userService.login(user.getUsername(), user.getPassword());
+        if(result.getFlag()) {
+            // if login successful, add user object to session data
+            httpServletRequest.getSession().setAttribute(SESSION_NAME, result.getData());
         }
-        return new Result(false, "username or password error");
+        return result;
     }
 
     /**
      * determine whether the user is login
-     * @param request
-     * @return User
+     * @param httpServletRequest session that records user information ("userinfo", user)
+     * @return Result
      * */
     @GetMapping("/isLogin")
-    public User isLogin(HttpServletRequest request) {
-        return userService.isLogin(request.getSession());
+    public Result isLogin(HttpServletRequest httpServletRequest) {
+        return userService.isLogin(httpServletRequest.getSession());
     }
 
-    @PostMapping("/register")
-    public Result register(@RequestBody User user) {
-        String message = "";
-        if (!user.getPassword().equals(user.getConfirmPassword())) {
-            return new Result(false, "The two sets of passwords do not match");
-        }
-
-        if (userService.usernameExists(user.getUsername())) {
-            return new Result(false, "This username already exists");
-        }
-        user.setType(0);
-        return new Result(userService.register(user));
+    /**
+     * user log out
+     * @param httpServletRequest the request used to process request
+     * @return Result successful message in Result object
+     * */
+    @GetMapping("/logout")
+    public Result logout(HttpServletRequest httpServletRequest) {
+        // clear session data
+        httpServletRequest.getSession().setAttribute(SESSION_NAME, null);
+        return new Result(true, "Logout successful");
     }
 
-    @GetMapping("/findUsername/{username}")
-    public Result usernameExists(@PathVariable("username") String username) {
-        if (userService.usernameExists(username)) {
-            return new Result(true, "This username already exists");
-        }
-        return new Result(false, "That's a great username");
-    }
 
-    @PutMapping
+    @PutMapping("/updateProfile")
     public Result updateProfile(@RequestBody User user) {
-        return new Result(userService.updateUserProfile(user));
+        return userService.updateUserProfile(user);
+    }
+
+    @GetMapping("/selectUserData/{id}")
+    public Result selectUserData(@PathVariable Integer id) {
+        return userService.selectById(id);
     }
 
     @DeleteMapping("/delete/{id}")
     public Result deleteUser(@PathVariable Integer id) {
-        return new Result(userService.deleteUser(id));
+        return userService.deleteUser(id);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.idv.yen.service;
 
 import com.idv.yen.domain.User;
+import com.idv.yen.service.Utils.Result;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
@@ -11,12 +12,12 @@ import java.util.List;
  * */
 @Service
 public interface UserService {
-    Boolean register(User user);
-    Boolean updateUserProfile(User user);
-    Boolean deleteUser(Integer id);
-    Boolean login(String username, String password);
-    Boolean usernameExists(String username);
-    User isLogin(HttpSession httpSession);
-    User selectById(Integer id);
-    List<User> selectAll();
+    Result register(User user);
+    Result updateUserProfile(User user);
+    Result deleteUser(Integer id);
+    Result login(String username, String password);
+    Result usernameExists(String username);
+    Result isLogin(HttpSession httpSession);
+    Result selectById(Integer id);
+
 }

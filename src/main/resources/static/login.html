@@ -12,80 +12,167 @@
     <script src="js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    
+
 </head>
 <body>
+<div id="app">
     <!-- header section starts -->
-    <div include-html="header.html"></div>
+    <header class="header">
+
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
+
+        <a href="#" class="logo"> LOGO<span>.</span></a>
+        <nav class="navbar">
+            <ul>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="shoppingCart.html">Shopping Cart</a></li>
+                <li id="store"><a href="#store" class="store">Store
+                    <icons class="fa fa-angle-double-down"></icons>
+                </a>
+                    <ul>
+                        <a href="#Add Product">Add Product</a>
+                    </ul>
+                </li>
+                <li><a href="#My_Order">My Order</a></li>
+                <li><a href="login.html" id="loginBtn">Login
+                    <icons class="fa fa-sign-in"></icons>
+                </a></li>
+                <li><a href="#" class="username" id="username">{{username}}
+                    <icons class="fa fa-user"></icons>
+                </a>
+                    <ul id="userSubList">
+                        <li><a href="#My Account">My Account</a></li>
+                        <li><a href="#Track List">Track List</a></li>
+                        <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                        <li><a href="#" id="logoutBtn" @click="logout">Logout
+                            <icons class="fa fa-sign-out"></icons>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+
+
+    </header>
     <!-- header section ends -->
 
     <!-- login section starts -->
-    <div id="app">
-        <div class="account-form-container">
-            <section class="account-form">
-                <form action="#" method="post">
-                    <h3> Welcome Back ! </h3>
-                    <p class="errMsg">{{errMsg}}</p>
-                    <input type="text" v-model="formData.username" required name="username" maxlength="16" placeholder="enter your account" class="input" @keyup.enter="submitForm">
-                    <input type="password" v-model="formData.password" required name="password" maxlength="30" placeholder="enter your password" class="input" @keyup.enter="submitForm">
-                    <p>don't have an account? <a href="register.html">register now</a></p>
-                    <input type="button" id="submit-btn" name="submit-btn" value="Login Now" class="btn" @click="submitForm">
-    
-                </form>
-            </section>
-        </div>
+
+    <div class="account-form-container">
+        <section class="account-form">
+            <form action="#" method="post">
+                <h3> Welcome Back ! </h3>
+                <p class="errMsg">{{errMsg}}</p>
+                <input type="text" v-model="formData.username" required name="username" maxlength="16"
+                       placeholder="enter your account" class="input" @keyup.enter="submitForm">
+                <input type="password" v-model="formData.password" required name="password" maxlength="30"
+                       placeholder="enter your password" class="input" @keyup.enter="submitForm">
+                <p>don't have an account? <a href="register.html">register now</a></p>
+                <input type="button" id="submit-btn" name="submit-btn" value="Login Now" class="btn"
+                       @click="submitForm">
+
+            </form>
+        </section>
     </div>
-    
-    <!-- login section ends -->
+</div>
 
-    <!-- footer section starts -->
-    <div include-html="footer.html"></div>
-    <!-- footer section ends -->
+<!-- login section ends -->
 
-    
+<!-- footer section starts -->
+<footer class="footer">
+    <section class="grid">
+        <div class="box">
+            <h3>Quick Links</h3>
+            <a href="#home"><i class="fas fa-angle-right"></i>Home</a>
+            <a href="#Products"><i class="fas fa-angle-right"></i>Products</a>
+            <a href="#Add Products"><i class="fas fa-angle-right"></i>Add Products</a>
+            <a href="#My Order"><i class="fas fa-angle-right"></i>My Order</a>
+        </div>
 
-    <!-- loading js method -->
-    <script>
-        includeHTML();
+        <div class="box">
+            <h3>Extra Links</h3>
+            <a href="#Login"><i class="fas fa-angle-right"></i>Login</a>
+            <a href="#Register"><i class="fas fa-angle-right"></i>Register</a>
+            <a href="#Dashboard"><i class="fas fa-angle-right"></i>Dashboard</a>
+        </div>
+    </section>
 
-        const {createApp} = Vue
+    <div class="developer">&copy copyright @ 2023 by <span> Hsiu Yen </span> | all rights reserved</div>
+</footer>
+<!-- footer section ends -->
 
-        createApp({
-            data() {
-                return {
-                    errMsg: "", 
-                    formData: {}, 
-                    rule: {
-                        username: [{required: true, message: "username is required info", trigger: 'blur'}], 
-                        password: [{required: true, message: "password is required info", trigger: 'blur'}]
-                    }
-                }
-            }, 
-            mounted() {
-            }, 
-            setup() {
 
-            }, 
-            methods: {
-                submitForm(event) {
-                    const _this = this;
-                    axios.post('/users/login', this.formData).then(function(response) {
-                        //1. get response data
-                        //2. determine whether flag is true
-                        if (response.data.flag) {
-                            //3. Login successful and jump to the home page
-                            location.href = "/home.html";
-                        } else {
-                            //4. Login failed, show error meaage
-                            _this.errMsg = response.data.message;
-                            _this.formData = {};
-                        }
-                    });
-                }
+<!-- loading js method -->
+<script>
+    // import { location } from '@element-plus/icons';
+
+    const {createApp} = Vue;
+
+    createApp({
+        data() {
+            return {
+                username: "",
+                errMsg: "",
+                formData: {}
             }
-        }).mount('#app')
+        },
+        mounted() {
+            
+        },
+        setup() {
 
-    </script>
+        },
+        methods: {
+            submitForm(event) {
+                const _this = this;
+                axios.post('/users/login', this.formData).then(response => {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        //3. Login successful and jump to the home page
+                        setTimeout(function () {
+                            window.location.href = "/home.html";
+                        }, 10);
+                    } else {
+                        //4. Login failed, show error meaage
+                        _this.errMsg = response.data.message;
+                        _this.formData = {};
+                    }
+                });
+            },
+            isLogin(event) {
+                const _this = this;
+                axios.get('/users/isLogin').then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        document.getElementById("loginBtn").style.display = 'none';
+                        document.getElementById("username").style.display = 'block';
+                        document.getElementById("userSubList").style.display = 'block';
+                        _this.username = response.data.data.username;
+                    } else {
+                        document.getElementById("username").style.display = 'none';
+                        document.getElementById("userSubList").style.display = 'none';
+                        document.getElementById("loginBtn").style.display = 'block';
+                        alert(response.data.data.username);
+                        _this.username = "Username";
+                    }
+                });
+                return;
+            },
+            logout(event) {
+                axios.get('/users/logout').then(function (response) {
+                    document.getElementById("username").style.display = 'none';
+                    document.getElementById("userSubList").style.display = 'none';
+                    document.getElementById("loginBtn").style.display = 'block';
+                    location.href = "/home.html";
+                });
+            }
+        }
+    }).mount('#app')
+
+</script>
 
 
 </body>
