@@ -4,6 +4,8 @@ import com.idv.yen.service.ImageService;
 import com.idv.yen.service.Utils.Result;
 import com.idv.yen.domain.Product;
 import com.idv.yen.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,8 +33,8 @@ public class ProductController {
     }
 
     @PutMapping("/updateProduct")
-    public Result updateProduct(@RequestBody Product product) {
-        return productService.updateProduct(product);
+    public Result updateProduct(@RequestPart(value = "file") MultipartFile file, @RequestPart(value = "product") Product product) {
+        return productService.updateProduct(file, product);
     }
 
     @GetMapping("/findAllProducts")

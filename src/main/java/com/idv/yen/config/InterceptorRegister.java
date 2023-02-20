@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * register interceptor
- * */
+ */
 //@Configuration
 public class InterceptorRegister implements WebMvcConfigurer {
 
@@ -26,7 +26,7 @@ public class InterceptorRegister implements WebMvcConfigurer {
 
     /**
      * Register the defined interceptors as Bean
-     * */
+     */
     @Bean
     public HandlerInterceptor getInterceptor() {
         return new UserInterceptor();

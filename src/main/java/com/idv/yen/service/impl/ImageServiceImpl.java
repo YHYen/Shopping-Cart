@@ -26,6 +26,7 @@ public class ImageServiceImpl implements ImageService {
     private ImageMapper imageMapper;
     private ImageUtil imageUtil;
     private File path = new File("");
+
     @Autowired
     public ImageServiceImpl(ImageMapper imageMapper) {
         this.imageMapper = imageMapper;
@@ -33,9 +34,10 @@ public class ImageServiceImpl implements ImageService {
 
     /**
      * get image from path use inputStream
+     *
      * @param filePath image location
      * @return InputStream if the image is found, return the image, otherwise return null
-     * */
+     */
     private InputStream getImgInputStream(String filePath) {
         try {
             return new FileInputStream(new File(filePath));
@@ -47,10 +49,11 @@ public class ImageServiceImpl implements ImageService {
 
     /**
      * Image upload: upload seller image
-     * @param file seller image file
+     *
+     * @param file   seller image file
      * @param userId the user id to apply for
      * @return Result whether the image upload successful and process message
-     * */
+     */
     @Override
     public Result uploadSellerImage(MultipartFile file, Integer userId) {
         // 1. check if the user has applied
@@ -83,9 +86,10 @@ public class ImageServiceImpl implements ImageService {
 
     /**
      * check if the image of user is already upload
+     *
      * @param foreignId seller id
      * @return Result whether the image has been uploaded
-     * */
+     */
     @Override
     public Result sellerImageExists(Integer foreignId) {
         if (imageMapper.selectSellerImageByForeignId(foreignId) == null)
@@ -103,9 +107,10 @@ public class ImageServiceImpl implements ImageService {
 
     /**
      * Find images from a specific seller
+     *
      * @param foreignId seller id
      * @return Result whether the image object find successful and process message
-     * */
+     */
     @Override
     public Result selectSellerImageByForeignId(Integer foreignId, HttpServletResponse httpServletResponse) throws IOException {
         // use foreignId to find image
@@ -119,7 +124,7 @@ public class ImageServiceImpl implements ImageService {
 
         final InputStream inputStream = getImgInputStream(image.getImagePath());
 
-        if(inputStream == null) {
+        if (inputStream == null) {
             // Image is not in the path display location
             return new Result(false, null, "your image disappeared");
         }
@@ -131,10 +136,11 @@ public class ImageServiceImpl implements ImageService {
 
     /**
      * Image update: update seller image
-     * @param file seller image file
+     *
+     * @param file  seller image file
      * @param image Image object containing image information
      * @return Result whether the seller image update successful and process message
-     * */
+     */
     @Override
     public Result updateSellerImage(MultipartFile file, Image image) {
         String filePath = image.getImagePath();
@@ -152,9 +158,10 @@ public class ImageServiceImpl implements ImageService {
 
     /**
      * Delete images from a specific seller
+     *
      * @param foreignId seller id
      * @return Result whether the seller image delete successful and process message
-     * */
+     */
     @Override
     public Result deleteSellerImageByForeignId(Integer foreignId) {
         if (imageMapper.deleteSellerImageForeignId(foreignId) > 1) {

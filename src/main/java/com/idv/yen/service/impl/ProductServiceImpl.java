@@ -19,17 +19,19 @@ import java.util.Map;
 public class ProductServiceImpl implements ProductService {
     private ProductMapper productMapper;
     private ImageUtil imageUtil;
+
     @Autowired
     public ProductServiceImpl(ProductMapper productMapper) {
         this.productMapper = productMapper;
     }
 
     /**
-     *  add product: upload the image first, then insert product data into the database
+     * add product: upload the image first, then insert product data into the database
+     *
+     * @param file    product image file
      * @param product product object containing product information
-     * @param file product image file
      * @return Result whether the product is added successfully and process message
-     * */
+     */
     @Override
     public Result addProduct(MultipartFile file, Product product) {
         // 1. use image util to upload product image
@@ -50,41 +52,75 @@ public class ProductServiceImpl implements ProductService {
             // 3.3. Failed to insert data into database, return error message
             return new Result(false, "Failed to add Product");
         }
-        // 2.2 Fail to upload image, return uploadResult with error message
+        // 2.1 Fail to upload image, return uploadResult with error message
         return uploadResult;
     }
 
     /**
      * delete product data by the product id
+     *
      * @param id the id of the product to delete
      * @return Result whether the product deleted successfully and process message
-     * */
+     */
     @Override
     public Result deleteProduct(Integer id) {
+        // 1. select Product by product id to get image path
+        Product originProduct = productMapper.selectById(id);
+
+        // 2. use image util to delete product image
+        imageUtil = new ImageUtil();
+        imageUtil.imageDelete(originProduct.getImagePath());
+
+        // 4. upload successful, delete product information from database
         if (productMapper.deleteById(id) > 0) {
+            // 5. delete data successful, return successful message
             return new Result(true, "Product deleted successfully");
         }
+        // 4.1. Failed to delete data into database, return error message
         return new Result(false, "Failed to delete Product");
     }
 
     /**
-     * update product data by the product object
+     * update product data by the product object and update
+     *
+     * @param file    product object containing product information
      * @param product product object containing product information
      * @return Result whether the product data is updated successfully and process message
-     * */
+     */
     @Override
-    public Result updateProduct(Product product) {
-        if (productMapper.updateById(product) > 0) {
-            return new Result(true, "Product updated successfully");
+    public Result updateProduct(MultipartFile file, Product product) {
+
+        // 1. select Product by product id to get image path
+        Product originProduct = productMapper.selectById(product.getId());
+
+        // 2. use image util to delete and update product image
+        imageUtil = new ImageUtil();
+        imageUtil.imageDelete(originProduct.getImagePath());
+        Result uploadResult = imageUtil.imageUpload(file, "/src/main/resources/static/images/product/");
+
+        // 3. determine whether product uploaded successfully
+        if (uploadResult.getFlag()) {
+            // 4. upload successful, update product information to database
+            // 4.2 set new product image path
+            product.setImagePath(uploadResult.getMessage());
+            // 4.1 update data and determine updated result
+            if (productMapper.updateById(product) > 0) {
+                // 5. update data successful, return successful message
+                return new Result(true, "Product updated successfully");
+            }
+            // 4.2. Failed to update data into database, return error message
+            return new Result(false, "Failed to add Product");
         }
-        return new Result(false, "Failed to update Product");
+        // 3.1 Fail to upload image, return uploadResult with error message
+        return uploadResult;
     }
 
     /**
      * find all product information
+     *
      * @return Result  whether the products data is founded successfully,
-     *         Data object containing all products information in List and process message
-     * */
+     * Data object containing all products information in List and process message
+     */
     @Override
     public Result selectAll() {
         // 1. get all products information from database
@@ -116,10 +152,11 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * find product information by product id
+     *
      * @param id the id of the product to find
      * @return Result whether the product data is founded successfully,
-     *         Data object containing product information and process message
-     * */
+     * Data object containing product information and process message
+     */
     @Override
     public Result selectById(Integer id) {
         Product product = productMapper.selectById(id);
@@ -131,10 +168,11 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * find product information by seller id
+     *
      * @param sellerId the id of the seller to find
      * @return Result whether the product data is founded successfully,
-     *         Data object containing all products information of seller in List and process message
-     * */
+     * Data object containing all products information of seller in List and process message
+     */
     @Override
     public Result selectBySellerId(Integer sellerId) {
         // 1. get all products information from database

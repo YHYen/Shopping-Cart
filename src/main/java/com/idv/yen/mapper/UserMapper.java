@@ -11,8 +11,9 @@ public interface UserMapper {
 
     /**
      * query all user information
+     *
      * @return List<User> return all user information and save them in list
-     * */
+     */
     @Result(column = "phone_number", property = "phoneNumber")
     @Select("select " +
             "   id, username, password, type, phone_number, email " +
@@ -22,9 +23,10 @@ public interface UserMapper {
 
     /**
      * use user id to query user information
+     *
      * @param id user id
      * @return User return the user information and encapsulate it into User object
-     * */
+     */
     @Result(column = "phone_number", property = "phoneNumber")
     @Select("select " +
             "   id, username, password, type, phone_number, email " +
@@ -36,8 +38,9 @@ public interface UserMapper {
 
     /**
      * use username to query user information
+     *
      * @return Integer return the user id
-     * */
+     */
     @Result(column = "phone_number", property = "phoneNumber")
     @Select("select " +
             "   id, username, password, type, phone_number, email " +
@@ -49,8 +52,9 @@ public interface UserMapper {
 
     /**
      * use username and password to query user information
+     *
      * @return Integer return the user id
-     * */
+     */
     @Result(property = "phoneNumber", column = "phone_number")
     @Select("select " +
             "   id, username, password, type, phone_number, email " +
@@ -62,9 +66,10 @@ public interface UserMapper {
 
     /**
      * add user to user table
+     *
      * @param user User object containing user information
      * @return int the number of rows changed in the database
-     * */
+     */
     @Insert("insert into " +
             "   tb_user " +
             "values" +
@@ -74,9 +79,10 @@ public interface UserMapper {
 
     /**
      * update user data in user table by the user id
+     *
      * @param user User object containing user information
      * @return int the number of rows changed in the database
-     * */
+     */
     @Update("update " +
             "   tb_user " +
             "set " +
@@ -91,9 +97,10 @@ public interface UserMapper {
 
     /**
      * delete user by id
+     *
      * @param id user id
      * @return int the number of rows changed in the database
-     * */
+     */
     @Delete("delete from " +
             "   tb_user " +
             "where " +

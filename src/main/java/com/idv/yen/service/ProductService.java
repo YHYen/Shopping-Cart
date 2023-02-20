@@ -8,13 +8,18 @@ import java.util.List;
 
 /**
  * all required method related to the Product
- * */
+ */
 public interface ProductService {
     Result addProduct(MultipartFile file, Product product);
+
     Result deleteProduct(Integer id);
-    Result updateProduct(Product product);
+
+    Result updateProduct(MultipartFile file, Product product);
+
     Result selectAll();
+
     Result selectById(Integer id);
+
     Result selectBySellerId(Integer sellerId);
 
 }

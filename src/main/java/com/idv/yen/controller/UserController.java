@@ -27,9 +27,10 @@ public class UserController {
 
     /**
      * user register
+     *
      * @param user object containing user register information
      * @return Result whether the user register successful and error message
-     * */
+     */
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
         return userService.register(user);
@@ -37,6 +38,7 @@ public class UserController {
 
     /**
      * check if username already exits
+     *
      * @param username username to register
      * @return Result whether the username already exists and error message
      */
@@ -47,15 +49,16 @@ public class UserController {
 
     /**
      * user login
-     * @param user object containing user login information
+     *
+     * @param user               object containing user login information
      * @param httpServletRequest request object, used to process session
      * @return Result whether the user login successful and error message
-     * */
+     */
     @PostMapping("/login")
     public Result login(@RequestBody User user, HttpServletRequest httpServletRequest) {
         // check if the user login information matches
         Result result = userService.login(user.getUsername(), user.getPassword());
-        if(result.getFlag()) {
+        if (result.getFlag()) {
             // if login successful, add user object to session data
             httpServletRequest.getSession().setAttribute(SESSION_NAME, result.getData());
         }
@@ -64,9 +67,10 @@ public class UserController {
 
     /**
      * determine whether the user is login
+     *
      * @param httpServletRequest session that records user information ("userinfo", user)
      * @return Result
-     * */
+     */
     @GetMapping("/isLogin")
     public Result isLogin(HttpServletRequest httpServletRequest) {
         return userService.isLogin(httpServletRequest.getSession());
@@ -74,9 +78,10 @@ public class UserController {
 
     /**
      * user log out
+     *
      * @param httpServletRequest the request used to process request
      * @return Result successful message in Result object
-     * */
+     */
     @GetMapping("/logout")
     public Result logout(HttpServletRequest httpServletRequest) {
         // clear session data
@@ -93,7 +98,7 @@ public class UserController {
         // 2. Upload photo of user ID to verify
         Result result = imageService.uploadSellerImage(file, user.getId());
 
-        if(result.getFlag()) {
+        if (result.getFlag()) {
             // verification passed, change the user type to seller (type = 1)
             user.setType(1);
             return userService.updateUserInfo(user);

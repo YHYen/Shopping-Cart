@@ -11,8 +11,9 @@ import java.util.List;
 public interface OrderMapper {
     /**
      * query all order information
+     *
      * @return List<Order> return all order information and save them in list
-     * */
+     */
     @Result(property = "userId", column = "user_id")
     @Result(property = "pay_type", column = "pay_type")
     @Result(property = "shippingStatus", column = "shipping_status")
@@ -24,9 +25,10 @@ public interface OrderMapper {
 
     /**
      * use cart id to query cart information
+     *
      * @param id cart id
      * @return Cart return the cart information and encapsulate it into Cart object
-     * */
+     */
     @Result(property = "userId", column = "user_id")
     @Result(property = "productId", column = "product_id")
     @Select("select " +
@@ -39,9 +41,10 @@ public interface OrderMapper {
 
     /**
      * add cart to cart table
+     *
      * @param cart cart object containing cart information
      * @return int the number of rows changed in the database
-     * */
+     */
     @Insert("insert into " +
             "   tb_cart " +
             "values" +
@@ -51,9 +54,10 @@ public interface OrderMapper {
 
     /**
      * update cart data in cart table by the cart id
+     *
      * @param cart cart object containing cart information
      * @return int the number of rows changed in the database
-     * */
+     */
     @Update("update " +
             "   tb_cart " +
             "set " +
@@ -67,9 +71,10 @@ public interface OrderMapper {
 
     /**
      * delete cart by id
+     *
      * @param id cart id
      * @return int the number of rows changed in the database
-     * */
+     */
     @Delete("delete from " +
             "   tb_cart " +
             "where " +

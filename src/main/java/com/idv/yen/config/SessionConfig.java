@@ -16,7 +16,7 @@ public class SessionConfig {
 
     /**
      * Set properties of the cookie serializer
-     * */
+     */
     @Bean
     public CookieSerializer cookieSerializer() {
         DefaultCookieSerializer cookieSerializer = new DefaultCookieSerializer();
@@ -28,14 +28,14 @@ public class SessionConfig {
 
         cookieSerializer.setUseHttpOnlyCookie(false);
 
-        cookieSerializer.setCookieMaxAge(60*60*24);
+        cookieSerializer.setCookieMaxAge(60 * 60 * 24);
 
         return cookieSerializer;
     }
 
     /**
      * register serializer
-     * */
+     */
     @Bean
     public MapSessionRepository mapSessionRepository() {
         return new MapSessionRepository(new ConcurrentHashMap<>());

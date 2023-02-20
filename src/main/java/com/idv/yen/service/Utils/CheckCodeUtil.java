@@ -11,7 +11,7 @@ import java.util.Random;
  */
 public class CheckCodeUtil {
     // {"宋體", "華文楷體", "黑體", "華文新魏", "華文隸書", "微軟雅黑", "楷體_GB2312"}
-    private static String[] fontNames = { "宋體", "華文楷體", "黑體", "微軟雅黑",  "楷體_GB2312" };
+    private static String[] fontNames = {"宋體", "華文楷體", "黑體", "微軟雅黑", "楷體_GB2312"};
     // 可選字元
     //"23456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
     private static String codes = "23456789abcdefghjkmnopqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ";
@@ -51,7 +51,7 @@ public class CheckCodeUtil {
         for (int i = 0; i < len; i++) {
             // 設定畫筆顏色 -- 隨機
             // g2.setColor(new Color(255, 0, 0));
-            g2.setColor(new Color(getRandom(0, 150), getRandom(0, 150),getRandom(0, 150)));
+            g2.setColor(new Color(getRandom(0, 150), getRandom(0, 150), getRandom(0, 150)));
 
             // 設定字型
             g2.setFont(new Font(fontNames[getRandom(0, fontNames.length)], Font.BOLD, fontSize));
@@ -80,14 +80,14 @@ public class CheckCodeUtil {
         }
 
         g2.setColor(Color.GRAY);
-        g2.drawRect(0, 0, this.width-1, this.height-1);
+        g2.drawRect(0, 0, this.width - 1, this.height - 1);
         // 4.儲存圖片到指定的輸出流
         try {
             ImageIO.write(this.img, "JPEG", outputStream);
         } catch (Exception e) {
             e.printStackTrace();
             throw new RuntimeException(e);
-        }finally{
+        } finally {
             // 5.釋放資源
             g2.dispose();
         }
@@ -97,6 +97,7 @@ public class CheckCodeUtil {
 
     /**
      * 獲取驗證碼字串
+     *
      * @return
      */
     public String getCode() {

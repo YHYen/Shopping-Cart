@@ -1,61 +1,63 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css');
 
-:root{
+:root {
     --gray: #929191;
-    --black:#1e2f3f;
-    --red:#e74c3c;
-    --warn-color:#ff1900;
-    --green:#14804a;
-    --light-black:#323e48;
-    --link-color:#1b4d76;
-    --light-color:#666;
-    --more-light-color:#777;
-    --white:#fff;
-    --light-bg:#eee;
-    --box-shadow:0 .5rem 1rem rgba(0, 0, 0, .1);
+    --black: #1e2f3f;
+    --red: #e74c3c;
+    --warn-color: #ff1900;
+    --green: #14804a;
+    --light-black: #323e48;
+    --link-color: #1b4d76;
+    --light-color: #666;
+    --more-light-color: #777;
+    --white: #fff;
+    --light-bg: #eee;
+    --box-shadow: 0 .5rem 1rem rgba(0, 0, 0, .1);
     --border: .1rem solid rgba(0, 0, 0, .3);
 }
 
-*{
-    margin: 0; padding: 0;
+* {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-    outline: none; border: none;
+    outline: none;
+    border: none;
     text-decoration: none;
     text-transform: capitalize;
     transition: .2s linear;
 }
 
-::-webkit-scrollbar{
+::-webkit-scrollbar {
     width: 1rem;
     height: .5rem;
 }
 
-::-webkit-scrollbar-track{
+::-webkit-scrollbar-track {
     background-color: transparent;
 }
 
-::-webkit-scrollbar-thumb{
+::-webkit-scrollbar-thumb {
     background-color: var(--black);
 }
 
-html{
-    font-size: 62.5%;   
+html {
+    font-size: 62.5%;
     scroll-behavior: smooth;
     scroll-padding-top: 6rem;
     overflow-x: hidden;
 }
 
-body{
+body {
     background-color: var(--light-bg);
 }
 
-section{
+section {
     padding: 2rem 9%;
-    margin: 0 auto;    
+    margin: 0 auto;
 }
 
-.heading{
+.heading {
     font-size: 3rem;
     color: var(--black);
     text-transform: capitalize;
@@ -63,7 +65,7 @@ section{
     text-align: center;
 }
 
-.empty{
+.empty {
     padding: 1.5rem;
     background-color: var(--white);
     border: var(--border);
@@ -76,9 +78,9 @@ section{
     border-radius: .5rem;
 }
 
-.btn, 
-.delete-btn, 
-.update-btn{
+.btn,
+.delete-btn,
+.update-btn {
     display: block;
     width: 100%;
     text-align: center;
@@ -90,27 +92,29 @@ section{
     text-transform: capitalize;
 }
 
-.btn{
+.btn {
     background-color: var(--link-color);
 }
 
-.delete-btn{
+.delete-btn {
     background-color: var(--red);
 }
 
-.update-btn{
+.update-btn {
     background-color: var(--green);
 }
 
-.btn:hover, 
+.btn:hover,
 .delete-btn:hover,
-.update-btn:hover{
+.update-btn:hover {
     background-color: var(--black);
 }
 
-header{
+header {
     position: sticky;
-    top: 0; left: 0; right: 0;
+    top: 0;
+    left: 0;
+    right: 0;
     background: var(--black);
     box-shadow: var(--box-shadow);
     padding: 0px 7%;
@@ -121,37 +125,37 @@ header{
     z-index: 1000;
 }
 
-header .logo{
+header .logo {
     font-size: 3rem;
     color: var(--white);
     font-weight: bolder;
 }
 
-header .logo span{
+header .logo span {
     color: var(--gray);
 }
 
-header .navbar ul{
+header .navbar ul {
     list-style: none;
 }
 
-header .navbar ul li{
+header .navbar ul li {
     position: relative;
     float: left;
 }
 
-header .navbar ul li a{
+header .navbar ul li a {
     font-size: 2rem;
     padding: 20px;
     color: var(--light-color);
     display: block;
 }
 
-header .navbar ul li a:hover{
+header .navbar ul li a:hover {
     color: var(--light-bg);
 }
 
-header .navbar ul li ul{
+header .navbar ul li ul {
     position: absolute;
     left: 0;
     width: 175px;
@@ -167,33 +171,33 @@ header .navbar ul li ul{
     padding-bottom: 1.5rem; */
 }
 
-header .navbar ul li ul li{
+header .navbar ul li ul li {
     width: 100%;
     border-top: var(--border);
     /* top: .5rem;
     margin: 1.5rem 0 .5rem; */
 }
 
-header .navbar ul li:hover > ul{
+header .navbar ul li:hover > ul {
     display: block;
     transform: scaleY(1);
     transform: .2s ease-out;
-    
-}   
 
-header .navbar ul li .username{
+}
+
+header .navbar ul li .username {
     display: none;
 }
 
-header .navbar ul .store{
+header .navbar ul .store {
     display: none;
 }
 
-header #toggler{
+header #toggler {
     display: none;
 }
 
-header .fa-bars{
+header .fa-bars {
     font-size: 3rem;
     color: var(--light-color);
     border-radius: .5rem;
@@ -203,7 +207,7 @@ header .fa-bars{
     display: none;
 }
 
-.footer .grid{
+.footer .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 30rem);
     gap: 1.5rem;
@@ -211,31 +215,31 @@ header .fa-bars{
     align-items: flex-start;
 }
 
-.footer .grid .box h3{
+.footer .grid .box h3 {
     font-size: 2rem;
     color: var(--black);
     margin: 1rem;
     text-transform: capitalize;
 }
 
-.footer .grid .box a{
+.footer .grid .box a {
     display: block;
     padding: 1rem 0;
     font-size: 1.6rem;
     color: var(--black);
 }
 
-.footer .grid .box a i{
+.footer .grid .box a i {
     color: var(--black);
     margin-right: .8rem;
     transition: .2 linear;
 }
 
-.footer .grid .box a:hover i{
+.footer .grid .box a:hover i {
     margin-right: 2rem;
 }
 
-.footer .developer{
+.footer .developer {
     text-align: center;
     padding: 1rem 2rem;
     font-size: 2rem;
@@ -245,12 +249,12 @@ header .fa-bars{
     line-height: 1.5;
 }
 
-.footer .developer span{
+.footer .developer span {
     color: var(--light-black);
     text-transform: capitalize;
 }
 
-.account-form-container{
+.account-form-container {
     background: rgba(0, 0, 0, .7) no-repeat;
     background-size: cover;
     background-position: center;
@@ -258,7 +262,7 @@ header .fa-bars{
     background-blend-mode: color;
 }
 
-.account-form-container .account-form{
+.account-form-container .account-form {
     min-height: 80vh;
     display: flex;
     align-items: center;
@@ -266,7 +270,7 @@ header .fa-bars{
 
 }
 
-.account-form-container .account-form form{
+.account-form-container .account-form form {
     background-color: var(--white);
     border-radius: 1rem;
     padding: 3rem 2rem;
@@ -274,14 +278,14 @@ header .fa-bars{
     text-align: center;
 }
 
-.account-form-container .account-form h3{
+.account-form-container .account-form h3 {
     font-size: 2.5rem;
     color: var(--black);
     text-transform: capitalize;
     margin-bottom: 1rem;
 }
 
-.account-form-container .account-form form .input{
+.account-form-container .account-form form .input {
     width: 100%;
     margin: 1rem 0;
     font-size: 1.8rem;
@@ -291,26 +295,26 @@ header .fa-bars{
     text-transform: none;
 }
 
-.account-form-container .account-form form p{
+.account-form-container .account-form form p {
     padding: 1rem 0;
     font-size: 1.6rem;
     color: var(--more-light-color);
 }
 
-.account-form-container .account-form .errMsg{
+.account-form-container .account-form .errMsg {
     color: var(--warn-color);
 }
 
-.account-form-container .account-form form p a{
+.account-form-container .account-form form p a {
     color: var(--link-color);
 }
 
-.account-form-container .account-form form p a:hover{
+.account-form-container .account-form form p a:hover {
     color: var(--black);
     text-decoration: underline;
 }
 
-.account-form-container .account-form form .btn{
+.account-form-container .account-form form .btn {
     display: inline-block;
     width: 100%;
     margin-top: 1rem;
@@ -324,19 +328,19 @@ header .fa-bars{
     text-align: center;
 }
 
-.account-form-container .account-form form .btn:hover{
+.account-form-container .account-form form .btn:hover {
     background-color: var(--light-black);
 }
 
-.add-product{
+.add-product {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    
+
 }
 
-.add-product form{
+.add-product form {
     background-color: var(--white);
     border-radius: .5rem;
     border: var(--border);
@@ -344,10 +348,10 @@ header .fa-bars{
     padding: 2rem;
     box-shadow: var(--box-shadow);
     width: 50rem;
-    
+
 }
 
-.add-product form h3{
+.add-product form h3 {
     text-transform: capitalize;
     color: var(--black);
     padding-bottom: 1rem;
@@ -355,7 +359,7 @@ header .fa-bars{
     text-align: center;
 }
 
-.add-product form .box{
+.add-product form .box {
     margin: 1rem 0;
     padding: 1.4rem;
     border-radius: .5rem;
@@ -365,24 +369,24 @@ header .fa-bars{
     width: 100%;
 }
 
-.add-product form p{
+.add-product form p {
     padding-top: 1rem;
     font-size: 1.6rem;
     color: var(--light-color);
 }
 
-.add-product form p span{
+.add-product form p span {
     color: var(--red);
 }
 
-.add-product .image{
+.add-product .image {
     height: 20rem;
     width: 100%;
     object-fit: contain;
     margin-bottom: 2rem;
 }
 
-.products .box-container{
+.products .box-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, 35rem);
     justify-content: center;
@@ -390,7 +394,7 @@ header .fa-bars{
     gap: 1.5rem;
 }
 
-.products .box-container .box{
+.products .box-container .box {
     background-color: var(--white);
     padding: 2rem;
     border-radius: .5rem;
@@ -398,34 +402,34 @@ header .fa-bars{
     box-shadow: var(--box-shadow);
 }
 
-.products .box-container .box .image{
+.products .box-container .box .image {
     height: 20rem;
     width: 100%;
     object-fit: contain;
     margin-bottom: 2rem;
 }
 
-.products .box-container .box .productName{
+.products .box-container .box .productName {
     font-size: 2rem;
     color: var(--black);
     text-transform: capitalize;
     padding: .5rem 0;
 }
 
-.products .box-container .box .flex{
+.products .box-container .box .flex {
     display: flex;
     align-items: center;
     gap: 1rem;
     padding: 1rem 0;
 }
 
-.products .box-container .box .flex .price{
+.products .box-container .box .flex .price {
     font-size: 1.8rem;
     color: var(--red);
     margin-right: auto;
 }
 
-.products .box-container .box .flex .quantity{
+.products .box-container .box .flex .quantity {
     font-size: 1.8rem;
     float: right;
     padding: .5rem 1rem;
@@ -435,7 +439,7 @@ header .fa-bars{
     border: var(--border);
 }
 
-.products .total{
+.products .total {
     max-width: 50rem;
     padding: 2rem;
     margin: 0 auto;
@@ -446,22 +450,22 @@ header .fa-bars{
     background-color: var(--white);
 }
 
-.products .total p{
+.products .total p {
     padding-bottom: 1rem;
     font-size: 2rem;
     color: var(--light-color);
     text-transform: capitalize;
 }
 
-.products .total p span{
+.products .total p span {
     color: var(--red);
 }
 
-.order-list{
+.order-list {
     /* display: flex;
     gap: 1.5;
     align-items: start; */
-    flex:1 1 30rem;
+    flex: 1 1 30rem;
     background-color: var(--white);
     box-shadow: var(--box-shadow);
     border: var(--border);
@@ -469,13 +473,13 @@ header .fa-bars{
     padding: 2rem;
 }
 
-.order-list .title{
+.order-list .title {
     font-size: 2.5rem;
     color: var(--black);
     text-transform: capitalize;
 }
 
-.order-list .flex{
+.order-list .flex {
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
@@ -484,33 +488,33 @@ header .fa-bars{
     border-bottom: var(--border);
 }
 
-.order-list .flex .left{
+.order-list .flex .left {
     display: flex;
     flex-wrap: nowrap;
 }
 
-.order-list .flex .left .text{
+.order-list .flex .left .text {
     display: flex;
     flex-direction: column;
     padding-left: 3rem;
 }
 
-.order-list .flex:hover img{
+.order-list .flex:hover img {
     transform: scale(1.3);
 }
 
-.order-list .flex:hover .name{
+.order-list .flex:hover .name {
     transform: scale(1.1);
     margin-left: 2rem;
 }
 
-.order-list .flex img{
+.order-list .flex img {
     height: 7rem;
     width: 5rem;
     object-fit: contain;
 }
 
-.order-list .flex .name{
+.order-list .flex .name {
     font-size: 2rem;
     color: var(--black);
     padding-bottom: .5rem;
@@ -519,24 +523,24 @@ header .fa-bars{
     text-overflow: ellipsis;
 }
 
-.order-list .flex .price{
+.order-list .flex .price {
     font-size: 1.7rem;
     color: var(--red);
 }
 
-.order-list .flex .quantity{
+.order-list .flex .quantity {
     font-size: .9rem;
     color: var(--black);
 }
 
-.order-list .flex .btn-container{
+.order-list .flex .btn-container {
     display: flex;
     flex-wrap: nowrap;
     position: relative;
 }
 
-.order-list .flex .btn-container .delete-btn, .update-btn{
-    
+.order-list .flex .btn-container .delete-btn, .update-btn {
+
     width: 100%;
     text-align: center;
     margin: .3rem;
@@ -547,51 +551,50 @@ header .fa-bars{
 }
 
 
-
-
-
 /* media queries */
-@media (max-width:991px){
-    html{
+@media (max-width: 991px) {
+    html {
         font-size: 55%;
     }
 
-    header{
+    header {
         padding: 2rem;
     }
 
-    section{
+    section {
         padding: 2rem;
     }
 }
 
-@media (max-width:768px){
-    html .fa-bars{
+@media (max-width: 768px) {
+    html .fa-bars {
         display: block;
     }
 
-    header .navbar{
+    header .navbar {
         position: absolute;
-        top: 99%; left: 0; right: 0;
+        top: 99%;
+        left: 0;
+        right: 0;
         background: var(--light-black);
         border-top: var(--box-shadow);
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
     }
 
-    header .navbar ul li{
+    header .navbar ul li {
         width: 100%;
     }
 
-    header .navbar ul li ul{
+    header .navbar ul li ul {
         position: relative;
         width: 100%;
     }
 
-    header #toggler:checked ~ .navbar{
+    header #toggler:checked ~ .navbar {
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
     }
 
-    header .navbar ul li a{
+    header .navbar ul li a {
         color: #eee;
         margin: 1.5rem;
         padding: 1.5rem;
@@ -600,16 +603,16 @@ header .fa-bars{
     }
 }
 
-@media (max-width:450px){
-    html{
+@media (max-width: 450px) {
+    html {
         font-size: 50%;
     }
 
-    .heading{
+    .heading {
         font-size: 3rem;
     }
 
-    .products .box-container{
+    .products .box-container {
         grid-template-columns: 1fr;
     }
 }

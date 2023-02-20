@@ -18,184 +18,183 @@
 </head>
 
 <body>
-    <div id="app">
-        <!-- header section starts -->
-        <header class="header">
+<div id="app">
+    <!-- header section starts -->
+    <header class="header">
 
-            <input type="checkbox" name="" id="toggler">
-            <label for="toggler" class="fas fa-bars"></label>
-    
-            <a href="#" class="logo"> LOGO<span>.</span></a>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
 
-                <nav class="navbar">
-                    <ul>
-                        <li><a href="Products.html">Products</a></li>
-                        <li><a href="#Shopping Cart">Shopping Cart</a></li>
-                        <li><a href="store.html" class="store" id="storeBtn">Store
-                            <icons class="fa fa-angle-double-down"></icons>
-                        </a>
-                            <ul id="sellerSubList">
-                                <a href="AddProducts.html">Add Product</a>
-                            </ul>
-                        </li>
-                        <li><a href="#My_Order">My Order</a></li>
-                        <li><a href="login.html" id="loginBtn">Login
-                            <icons class="fa fa-sign-in"></icons>
-                        </a></li>
-                        <li><a href="#" class="username" id="username">{{username}}
-                            <icons class="fa fa-user"></icons>
-                        </a>
-                            <ul id="userSubList">
-                                <li><a href="#My Account">My Account</a></li>
-                                <li><a href="#Track List">Track List</a></li>
-                                <li><a href="sellerRegister.html">Become<br>a seller</a></li>
-                                <li><a href="#" id="logoutBtn" @click="logout">Logout
-                                    <icons class="fa fa-sign-out"></icons>
-                                </a></li>
-                            </ul>
-                        </li>
+        <a href="#" class="logo"> LOGO<span>.</span></a>
+
+        <nav class="navbar">
+            <ul>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="#Shopping Cart">Shopping Cart</a></li>
+                <li><a href="store.html" class="store" id="storeBtn">Store
+                    <icons class="fa fa-angle-double-down"></icons>
+                </a>
+                    <ul id="sellerSubList">
+                        <a href="AddProducts.html">Add Product</a>
                     </ul>
-                </nav>
+                </li>
+                <li><a href="#My_Order">My Order</a></li>
+                <li><a href="login.html" id="loginBtn">Login
+                    <icons class="fa fa-sign-in"></icons>
+                </a></li>
+                <li><a href="#" class="username" id="username">{{username}}
+                    <icons class="fa fa-user"></icons>
+                </a>
+                    <ul id="userSubList">
+                        <li><a href="#My Account">My Account</a></li>
+                        <li><a href="#Track List">Track List</a></li>
+                        <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                        <li><a href="#" id="logoutBtn" @click="logout">Logout
+                            <icons class="fa fa-sign-out"></icons>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
 
-    
-    
-        </header>
-        <!-- header section ends -->
 
-        <!-- login section starts -->
-        <section class="add-product">
-            <form action="#" method="post" enctype="multipart/form-data">
-                <h3> Become A Seller ! </h3>
-                <p class="errMsg" :style="{color: msgColor}">{{errMsg}}</p>
-                <p>ID Photo <span>*</span></p>
-                <input type="file" id="sellerPhoto" name="sellerPhoto" required accept="image/png,image/jpeg,image/jpg" class="box" @change="changeFile">
-                <input type="button" id="submit-btn" name="submit-btn" value="apply to be a seller" class="btn" @click="uploadFile">
-            </form>
+    </header>
+    <!-- header section ends -->
 
-            <!-- <form action="" method="post" id="addImage">
-                <img src="" ref="seller" class="image" @change="setImage">
-            </form> -->
+    <!-- login section starts -->
+    <section class="add-product">
+        <form action="#" method="post" enctype="multipart/form-data">
+            <h3> Become A Seller ! </h3>
+            <p class="errMsg" :style="{color: msgColor}">{{errMsg}}</p>
+            <p>ID Photo <span>*</span></p>
+            <input type="file" id="sellerPhoto" name="sellerPhoto" required accept="image/png,image/jpeg,image/jpg"
+                   class="box" @change="changeFile">
+            <input type="button" id="submit-btn" name="submit-btn" value="apply to be a seller" class="btn"
+                   @click="uploadFile">
+        </form>
+
+        <!-- <form action="" method="post" id="addImage">
+            <img src="" ref="seller" class="image" @change="setImage">
+        </form> -->
+    </section>
+
+
+    <!-- login section ends -->
+
+    <!-- footer section starts -->
+    <footer class="footer">
+        <section class="grid">
+            <div class="box">
+                <h3>Quick Links</h3>
+                <a href="#home"><i class="fas fa-angle-right"></i>Home</a>
+                <a href="#Products"><i class="fas fa-angle-right"></i>Products</a>
+                <a href="#Add Products"><i class="fas fa-angle-right"></i>Add Products</a>
+                <a href="#My Order"><i class="fas fa-angle-right"></i>My Order</a>
+            </div>
+
+            <div class="box">
+                <h3>Extra Links</h3>
+                <a href="#Login"><i class="fas fa-angle-right"></i>Login</a>
+                <a href="#Register"><i class="fas fa-angle-right"></i>Register</a>
+                <a href="#Dashboard"><i class="fas fa-angle-right"></i>Dashboard</a>
+            </div>
         </section>
 
-
-        <!-- login section ends -->
-
-        <!-- footer section starts -->
-        <footer class="footer">
-            <section class="grid">
-                <div class="box">
-                    <h3>Quick Links</h3>
-                    <a href="#home"><i class="fas fa-angle-right"></i>Home</a>
-                    <a href="#Products"><i class="fas fa-angle-right"></i>Products</a>
-                    <a href="#Add Products"><i class="fas fa-angle-right"></i>Add Products</a>
-                    <a href="#My Order"><i class="fas fa-angle-right"></i>My Order</a>
-                </div>
-    
-                <div class="box">
-                    <h3>Extra Links</h3>
-                    <a href="#Login"><i class="fas fa-angle-right"></i>Login</a>
-                    <a href="#Register"><i class="fas fa-angle-right"></i>Register</a>
-                    <a href="#Dashboard"><i class="fas fa-angle-right"></i>Dashboard</a>
-                </div>
-            </section>
-    
-            <div class="developer">&copy copyright @ 2023 by <span> Hsiu Yen </span> | all rights reserved</div>
-        </footer>
-        <!-- footer section ends -->
-    </div>
-    
+        <div class="developer">&copy copyright @ 2023 by <span> Hsiu Yen </span> | all rights reserved</div>
+    </footer>
+    <!-- footer section ends -->
+</div>
 
 
+<!-- loading js method -->
+<script>
+    const {createApp} = Vue
 
-    <!-- loading js method -->
-    <script>
-        const {createApp} = Vue
+    createApp({
+        data() {
+            return {
+                username: "",
+                errMsg: "",
+                msgColor: "red",
+                seller: "",
+                formData: new FormData(),
+            }
+        },
+        mounted() {
+            this.isLogin();
+        },
+        setup() {
 
-        createApp({
-            data() {
-                return {
-                    username: "",
-                    errMsg: "",
-                    msgColor: "red",
-                    seller: "", 
-                    formData: new FormData(),
-                }
+        },
+        methods: {
+            uploadFile(event) {
+                var _this = this;
+                axios.post('/users/sellerApplication', this.formData).then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        //3. Registration is successful, jump to the registration page, and display a success message
+                        setTimeout(function () {
+                            window.location.href = "/home.html";
+                        }, 10);
+                    } else {
+                        //4. Registration failed, show error message
+                        _this.msgColor = "#ff1900";
+                        _this.errMsg = response.data.message;
+
+                    }
+                });
             },
-            mounted() {
-                this.isLogin();
-            },
-            setup() {
+            changeFile(event) {
+                this.formData.append('file', event.target.files[0]);
 
             },
-            methods: {
-                uploadFile(event) {
-                    var _this = this;
-                    axios.post('/users/sellerApplication', this.formData).then(function (response) {
-                        //1. get response data
-                        //2. determine whether flag is true
-                        if (response.data.flag) {
-                            //3. Registration is successful, jump to the registration page, and display a success message
-                            setTimeout(function () {
-                                window.location.href = "/home.html";
-                            }, 10);
-                        } else {
-                            //4. Registration failed, show error message
-                            _this.msgColor = "#ff1900";
-                            _this.errMsg = response.data.message;
-                            
-                        }
-                    });
-                },
-                changeFile(event) {
-                    this.formData.append('file', event.target.files[0]);
-                    
-                }, 
-                setImage(event) {
-                    filePath=this.formData.get('file').path;
-                    this.seller = require('@'+filePath)
-                    
-                }, 
-                isLogin(event) {
-                    const _this = this;
-                    axios.get('/users/isLogin').then(function (response) {
-                        //1. get response data
-                        //2. determine whether flag is true
-                        if (response.data.flag) {
-                            document.getElementById("loginBtn").style.display = 'none';
-                            document.getElementById("username").style.display = 'block';
-                            document.getElementById("userSubList").style.display = 'block';
-                            _this.username = response.data.data.username;
-                        } else {
-                            document.getElementById("username").style.display = 'none';
-                            document.getElementById("userSubList").style.display = 'none';
-                            document.getElementById("loginBtn").style.display = 'block';
-                            alert(response.data.data.username);
-                            _this.username = "Username";
-                        }
+            setImage(event) {
+                filePath = this.formData.get('file').path;
+                this.seller = require('@' + filePath)
 
-                        if (response.data.data.type == 1) {
-                            document.getElementById("storeBtn").style.display = 'block';
-                            document.getElementById("sellerSubList").style.display = 'block';
-                        } else {
-                            document.getElementById("sellerSubList").style.display = 'none';
-                            document.getElementById("storeBtn").style.display = 'none';
-                        }
-                    });
-                    return;
-                }, 
-                logout(event) {
-                    axios.get('/users/logout').then(function (response) {
+            },
+            isLogin(event) {
+                const _this = this;
+                axios.get('/users/isLogin').then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        document.getElementById("loginBtn").style.display = 'none';
+                        document.getElementById("username").style.display = 'block';
+                        document.getElementById("userSubList").style.display = 'block';
+                        _this.username = response.data.data.username;
+                    } else {
                         document.getElementById("username").style.display = 'none';
                         document.getElementById("userSubList").style.display = 'none';
                         document.getElementById("loginBtn").style.display = 'block';
-                        location.href = "/home.html";
-                    });
-                }
+                        alert(response.data.data.username);
+                        _this.username = "Username";
+                    }
 
-
+                    if (response.data.data.type == 1) {
+                        document.getElementById("storeBtn").style.display = 'block';
+                        document.getElementById("sellerSubList").style.display = 'block';
+                    } else {
+                        document.getElementById("sellerSubList").style.display = 'none';
+                        document.getElementById("storeBtn").style.display = 'none';
+                    }
+                });
+                return;
+            },
+            logout(event) {
+                axios.get('/users/logout').then(function (response) {
+                    document.getElementById("username").style.display = 'none';
+                    document.getElementById("userSubList").style.display = 'none';
+                    document.getElementById("loginBtn").style.display = 'block';
+                    location.href = "/home.html";
+                });
             }
-        }).mount('#app')
-    </script>
+
+
+        }
+    }).mount('#app')
+</script>
 </body>
 
 </html>

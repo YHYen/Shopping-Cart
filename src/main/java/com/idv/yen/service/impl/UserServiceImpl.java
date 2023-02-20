@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
 
         user.setType(0);
 
-        if(userMapper.insertUser(user) > 0) {
+        if (userMapper.insertUser(user) > 0) {
             return new Result(true, "registration successfully");
         } else {
             return new Result(false, "registration failed");
@@ -57,6 +57,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * check if username already exits
+     *
      * @param username username to register
      * @return Result whether the username already exists and process message
      */
@@ -71,6 +72,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * check if the user login information matches
+     *
      * @param username username to login
      * @param password user password to login
      * @return Result whether the user login successful and process message

@@ -13,7 +13,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    
 </head>
 <body>
 <div id="app">
@@ -22,42 +21,42 @@
 
         <input type="checkbox" name="" id="toggler">
         <label for="toggler" class="fas fa-bars"></label>
-    
+
         <a href="#" class="logo"> LOGO<span>.</span></a>
-            <nav class="navbar">
-                <ul>
-                    <li><a href="Products.html">Products</a></li>
-                    <li><a href="#Shopping Cart">Shopping Cart</a></li>
-                    <li><a href="store.html" class="store" id="storeBtn">Store
-                        <icons class="fa fa-angle-double-down"></icons>
-                    </a>
-                        <ul id="sellerSubList">
-                            <a href="AddProducts.html">Add Product</a>
-                        </ul>
-                    </li>
-                    <li><a href="#My_Order">My Order</a></li>
-                    <li><a href="login.html" id="loginBtn">Login
-                        <icons class="fa fa-sign-in"></icons>
-                    </a></li>
-                    <li><a href="#" class="username" id="username">{{username}}
-                        <icons class="fa fa-user"></icons>
-                    </a>
-                        <ul id="userSubList">
-                            <li><a href="#My Account">My Account</a></li>
-                            <li><a href="#Track List">Track List</a></li>
-                            <li><a href="sellerRegister.html">Become<br>a seller</a></li>
-                            <li><a href="#" id="logoutBtn" @click="logout">Logout
-                                <icons class="fa fa-sign-out"></icons>
-                            </a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
+        <nav class="navbar">
+            <ul>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="#Shopping Cart">Shopping Cart</a></li>
+                <li><a href="store.html" class="store" id="storeBtn">Store
+                    <icons class="fa fa-angle-double-down"></icons>
+                </a>
+                    <ul id="sellerSubList">
+                        <a href="AddProducts.html">Add Product</a>
+                    </ul>
+                </li>
+                <li><a href="#My_Order">My Order</a></li>
+                <li><a href="login.html" id="loginBtn">Login
+                    <icons class="fa fa-sign-in"></icons>
+                </a></li>
+                <li><a href="#" class="username" id="username">{{username}}
+                    <icons class="fa fa-user"></icons>
+                </a>
+                    <ul id="userSubList">
+                        <li><a href="#My Account">My Account</a></li>
+                        <li><a href="#Track List">Track List</a></li>
+                        <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                        <li><a href="#" id="logoutBtn" @click="logout">Logout
+                            <icons class="fa fa-sign-out"></icons>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
     </header>
     <!-- header section ends -->
 
     <!-- products section starts -->
-    
+
     <section class="order">
 
         <h1 class="heading">my store</h1>
@@ -65,28 +64,30 @@
             <h3 class="title">all products</h3>
             <div v-if="haveData">
                 <div v-for="product in products" class="flex">
-                    
-                        <div class="left">
-                            <img :src="'data:image/png;base64,' + product.imagePath" alt="">
-                            <div class="text">
-                                <h3 class="name">{{product.productName}}</h3>
-                                <p class="price">NT<i class="fas fa-dollar-sign"></i> {{product.price}}</p>
-                                <p class="quantity" id="quantity">left: {{product.quantity}}</p>
-                            </div>
-                            
+
+                    <div class="left">
+                        <img :src="'data:image/png;base64,' + product.imagePath" alt="">
+                        <div class="text">
+                            <h3 class="name">{{product.productName}}</h3>
+                            <p class="price">NT<i class="fas fa-dollar-sign"></i> {{product.price}}</p>
+                            <p class="quantity" id="quantity">left: {{product.quantity}}</p>
                         </div>
-                        
-                        <div class="btn-container">
-                            <input type="button" value="Update" name="add_to_cart" class="update-btn">
-                            <input type="button" value="Delete" name="add_to_cart" class="delete-btn">
-                        </div>
+
+                    </div>
+
+                    <div class="btn-container">
+                        <input type="button" value="Update" name="add_to_cart" class="update-btn"
+                               @click="updateProduct(product)">
+                        <input type="button" value="Delete" name="add_to_cart" class="delete-btn"
+                               @click="deleteProduct(product.id)">
+                    </div>
                 </div>
             </div>
             <p v-else class="empty">no products found!</p>
         </div>
-        
+
     </section>
-    
+
     <!-- products section ends -->
 
     <!-- footer section starts -->
@@ -99,7 +100,7 @@
                 <a href="#Add Products"><i class="fas fa-angle-right"></i>Add Products</a>
                 <a href="#My Order"><i class="fas fa-angle-right"></i>My Order</a>
             </div>
-    
+
             <div class="box">
                 <h3>Extra Links</h3>
                 <a href="#Login"><i class="fas fa-angle-right"></i>Login</a>
@@ -107,94 +108,117 @@
                 <a href="#Dashboard"><i class="fas fa-angle-right"></i>Dashboard</a>
             </div>
         </section>
-    
+
         <div class="developer">&copy copyright @ 2023 by <span> Hsiu Yen </span> | all rights reserved</div>
     </footer>
     <!-- footer section ends -->
-    
-</div> 
-  
 
-    <!-- loading js method -->
-    <script>
-        const {createApp} = Vue
+</div>
 
-        createApp({
-            data() {
-                return {
-                    username: "",
-                    userId: "", 
-                    haveData: false, 
-                    products: [],
-                }
+
+<!-- loading js method -->
+<script>
+    const {createApp} = Vue
+
+    createApp({
+        data() {
+            return {
+                username: "",
+                userId: "",
+                haveData: false,
+                products: [],
+            }
+        },
+        mounted() {
+            this.isLogin();
+        },
+        setup() {
+
+        },
+        methods: {
+            findSellerProduct(event) {
+                const _this = this;
+                axios.get('/products/findSellerProducts/' + this.userId).then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        //3. find products
+                        _this.products = response.data.data;
+                        _this.haveData = true;
+                    } else {
+                        //4. product no found
+                        _this.haveData = false;
+                    }
+                });
             },
-            mounted() {
-                this.isLogin();   
+            updateProduct(product) {
+                console.log(product);
+                document.cookie = 'id=' + product.id;
+                document.cookie = 'productName=' + product.productName;
+                document.cookie = 'price=' + product.price;
+                document.cookie = 'quantity=' + product.quantity;
+                var cookie = document.cookie;
+                console.log(cookie);
+                setTimeout(function () {
+                    window.location.href = "/UpdateProducts.html";
+                }, 10);
             },
-            setup() {
-
+            deleteProduct(id) {
+                axios.delete('products/deleteProduct/' + id).then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        console.log(response.data.message);
+                    } else {
+                        console.log(response.data.message);
+                    }
+                }).finally(() => {
+                    this.findSellerProduct();
+                });
             },
-            methods: {
-                findSellerProduct(event) {
-                    const _this = this;
-                    console.log(this.userId);
-                    console.log('/products/findSellerProducts/'+this.userId);
-                    axios.get('/products/findSellerProducts/'+this.userId).then(function (response) {
-                        //1. get response data
-                        //2. determine whether flag is true
-                        if (response.data.flag) {
-                            //3. find products
-                            _this.products = response.data.data;
-                            _this.haveData = true;
-                        } else {
-                            //4. product no found
-                            _this.haveData = false;
-                        }
-                    });
-                },  
-                isLogin(event) {
-                    const _this = this;
-                    axios.get('/users/isLogin').then(function (response) {
-                        //1. get response data
-                        //2. determine whether flag is true
-                        if (response.data.flag) {
-                            document.getElementById("loginBtn").style.display = 'none';
-                            document.getElementById("username").style.display = 'block';
-                            document.getElementById("userSubList").style.display = 'block';
-                            _this.username = response.data.data.username;
-                            _this.userId = response.data.data.id;
-                        } else {
-                            document.getElementById("username").style.display = 'none';
-                            document.getElementById("userSubList").style.display = 'none';
-                            document.getElementById("loginBtn").style.display = 'block';
-                            _this.username = "Username";
-                        }
-
-                        if (response.data.data.type == 1) {
-                            document.getElementById("storeBtn").style.display = 'block';
-                            document.getElementById("sellerSubList").style.display = 'block';
-                        } else {
-                            document.getElementById("sellerSubList").style.display = 'none';
-                            document.getElementById("storeBtn").style.display = 'none';
-                        }
-                    }).finally(() => {
-                        this.findSellerProduct();
-                    });
-                }, 
-                logout(event) {
-                    axios.get('/users/logout').then(function (response) {
+            isLogin(event) {
+                const _this = this;
+                axios.get('/users/isLogin').then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        document.getElementById("loginBtn").style.display = 'none';
+                        document.getElementById("username").style.display = 'block';
+                        document.getElementById("userSubList").style.display = 'block';
+                        _this.username = response.data.data.username;
+                        _this.userId = response.data.data.id;
+                    } else {
                         document.getElementById("username").style.display = 'none';
                         document.getElementById("userSubList").style.display = 'none';
                         document.getElementById("loginBtn").style.display = 'block';
+                        _this.username = "Username";
+                    }
+
+                    if (response.data.data.type == 1) {
+                        document.getElementById("storeBtn").style.display = 'block';
+                        document.getElementById("sellerSubList").style.display = 'block';
+                    } else {
                         document.getElementById("sellerSubList").style.display = 'none';
                         document.getElementById("storeBtn").style.display = 'none';
-                        location.href = "/home.html";
-                    });
-                }
-
-
+                    }
+                }).finally(() => {
+                    this.findSellerProduct();
+                });
+            },
+            logout(event) {
+                axios.get('/users/logout').then(function (response) {
+                    document.getElementById("username").style.display = 'none';
+                    document.getElementById("userSubList").style.display = 'none';
+                    document.getElementById("loginBtn").style.display = 'block';
+                    document.getElementById("sellerSubList").style.display = 'none';
+                    document.getElementById("storeBtn").style.display = 'none';
+                    location.href = "/home.html";
+                });
             }
-        }).mount('#app')
-    </script>
+
+
+        }
+    }).mount('#app')
+</script>
 </body>
 </html>

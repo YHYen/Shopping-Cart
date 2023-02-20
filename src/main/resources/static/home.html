@@ -75,7 +75,7 @@
                 <h3>Extra Links</h3>
                 <a href="#Login"><i class="fas fa-angle-right"></i>Login</a>
                 <a href="#Register"><i class="fas fa-angle-right"></i>Register</a>
-                <a href="#Dashboard"><i class="fas fa-angle-right"></i>Dashboard</a>
+                <a href="#"><i class="fas fa-angle-right"></i>Dashboard</a>
             </div>
         </section>
 
@@ -92,13 +92,14 @@
     createApp({
         data() {
             return {
-                username: "",
+                username: "Username",
                 errMsg: "",
                 formData: {}
             }
         },
         mounted() {
             this.isLogin();
+            console.log(document.cookie);
         },
         setup() {
 
@@ -118,17 +119,15 @@
                         document.getElementById("username").style.display = 'none';
                         document.getElementById("userSubList").style.display = 'none';
                         document.getElementById("loginBtn").style.display = 'block';
-                        alert(response.data.data.username);
-                        _this.username = "Username";
                     }
 
                     if (response.data.data.type == 1) {
-                            document.getElementById("storeBtn").style.display = 'block';
-                            document.getElementById("sellerSubList").style.display = 'block';
-                        } else {
-                            document.getElementById("sellerSubList").style.display = 'none';
-                            document.getElementById("storeBtn").style.display = 'none';
-                        }
+                        document.getElementById("storeBtn").style.display = 'block';
+                        document.getElementById("sellerSubList").style.display = 'block';
+                    } else {
+                        document.getElementById("sellerSubList").style.display = 'none';
+                        document.getElementById("storeBtn").style.display = 'none';
+                    }
                 });
                 return;
             },

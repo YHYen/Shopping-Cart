@@ -11,8 +11,9 @@ import java.util.List;
 public interface CartMapper {
     /**
      * query all cart information
+     *
      * @return List<Cart> return all cart information and save them in list
-     * */
+     */
     @ResultMap("cartResultMap")
     @Select("select " +
             "   id, user_id, product_id, quantity, create_time " +
@@ -22,9 +23,10 @@ public interface CartMapper {
 
     /**
      * use cart id to query cart information
+     *
      * @param id cart id
      * @return Cart return the cart information and encapsulate it into Cart object
-     * */
+     */
     @ResultMap("cartResultMap")
     @Select("select " +
             "   user_id, product_id, quantity, create_time " +
@@ -36,9 +38,10 @@ public interface CartMapper {
 
     /**
      * add cart to cart table
+     *
      * @param cart cart object containing cart information
      * @return int the number of rows changed in the database
-     * */
+     */
     @Insert("insert into " +
             "   tb_cart " +
             "values" +
@@ -48,9 +51,10 @@ public interface CartMapper {
 
     /**
      * update cart data in cart table by the cart id
+     *
      * @param cart cart object containing cart information
      * @return int the number of rows changed in the database
-     * */
+     */
     @Update("update " +
             "   tb_cart " +
             "set " +
@@ -64,9 +68,10 @@ public interface CartMapper {
 
     /**
      * delete cart by id
+     *
      * @param id cart id
      * @return int the number of rows changed in the database
-     * */
+     */
     @Delete("delete from " +
             "   tb_cart " +
             "where " +
