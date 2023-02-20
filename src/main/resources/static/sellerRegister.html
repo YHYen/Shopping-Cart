@@ -26,16 +26,16 @@
             <label for="toggler" class="fas fa-bars"></label>
     
             <a href="#" class="logo"> LOGO<span>.</span></a>
-            <div id="app">
+
                 <nav class="navbar">
                     <ul>
                         <li><a href="Products.html">Products</a></li>
                         <li><a href="#Shopping Cart">Shopping Cart</a></li>
-                        <li id="store"><a href="#store" class="store">Store
+                        <li><a href="store.html" class="store" id="storeBtn">Store
                             <icons class="fa fa-angle-double-down"></icons>
                         </a>
-                            <ul>
-                                <a href="#Add Product">Add Product</a>
+                            <ul id="sellerSubList">
+                                <a href="AddProducts.html">Add Product</a>
                             </ul>
                         </li>
                         <li><a href="#My_Order">My Order</a></li>
@@ -56,7 +56,7 @@
                         </li>
                     </ul>
                 </nav>
-            </div>
+
     
     
         </header>
@@ -130,7 +130,7 @@
             methods: {
                 uploadFile(event) {
                     var _this = this;
-                    axios.post('/images/sellerImageUpload', this.formData).then(function (response) {
+                    axios.post('/users/sellerApplication', this.formData).then(function (response) {
                         //1. get response data
                         //2. determine whether flag is true
                         if (response.data.flag) {
@@ -171,6 +171,14 @@
                             document.getElementById("loginBtn").style.display = 'block';
                             alert(response.data.data.username);
                             _this.username = "Username";
+                        }
+
+                        if (response.data.data.type == 1) {
+                            document.getElementById("storeBtn").style.display = 'block';
+                            document.getElementById("sellerSubList").style.display = 'block';
+                        } else {
+                            document.getElementById("sellerSubList").style.display = 'none';
+                            document.getElementById("storeBtn").style.display = 'none';
                         }
                     });
                     return;

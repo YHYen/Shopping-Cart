@@ -78,7 +78,7 @@ public class CheckCodeUtil {
             g2.drawLine(getRandom(0, 120), getRandom(0, 30), getRandom(0, 120),
                     getRandom(0, 30));
         }
-        //TODO:
+
         g2.setColor(Color.GRAY);
         g2.drawRect(0, 0, this.width-1, this.height-1);
         // 4.儲存圖片到指定的輸出流

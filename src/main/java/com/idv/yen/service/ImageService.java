@@ -13,13 +13,10 @@ import org.springframework.web.multipart.MultipartFile;
  * */
 @Service
 public interface ImageService {
-    Result uploadSellerImage(MultipartFile file, HttpSession httpSession);
+    Result uploadSellerImage(MultipartFile file, Integer userId);
     Result sellerImageExists(Integer foreignId);
-    Result uploadProductImage(MultipartFile file, Product product);
     Result selectSellerImageByForeignId(Integer foreignId, HttpServletResponse httpServletResponse) throws Exception;
-    Result selectProductImageByForeignId(Integer foreignId, HttpServletResponse httpServletResponse) throws Exception;
     Result updateSellerImage(MultipartFile file, Image image);
-    Result updateProductImage(MultipartFile file, Image image);
     Result deleteSellerImageByForeignId(Integer foreignId);
-    Result deleteProductImageByForeignId(Integer foreignId);
+
 }

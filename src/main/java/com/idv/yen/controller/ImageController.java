@@ -28,41 +28,9 @@ public class ImageController {
         this.userService = userService;
     }
 
-    @PostMapping("/sellerImageUpload")
-    public Result uploadSellerImage(@RequestPart(value = "file") MultipartFile file, HttpSession httpSession) throws Exception {
-        Result result = imageService.uploadSellerImage(file, httpSession);
-
-        // if update successfully, update user type
-        if (result.getFlag()) {
-            userService.updateUserProfile((User) result.getData());
-        }
-
-        return result;
-
-    }
-
-    @PostMapping("/productImageUpload")
-    public Result uploadProductImage(@RequestPart(value = "file") MultipartFile file, Product product) throws Exception {
-        return imageService.uploadProductImage(file, product);
-    }
-
-    @GetMapping("/getProduct")
-    public Result selectProductImageByForeignId(@RequestBody Product product, HttpServletResponse httpServletResponse) throws Exception {
-        return imageService.selectProductImageByForeignId(product.getId(), httpServletResponse);
-    }
 
     @PutMapping("/sellerImageUpdate")
     public Result updateSellerImage(@RequestPart(value = "file") MultipartFile file, @RequestBody Image image) {
         return imageService.updateSellerImage(file, image);
-    }
-
-    @PutMapping("/productImageUpdate")
-    public Result updateProductImage(@RequestPart(value = "file") MultipartFile file, @RequestBody Image image) {
-        return imageService.updateSellerImage(file, image);
-    }
-
-    @DeleteMapping("/deleteProduct")
-    public Result deleteProductImageByForeignId(@RequestBody Product product) {
-        return imageService.deleteProductImageByForeignId(product.getId());
     }
 }

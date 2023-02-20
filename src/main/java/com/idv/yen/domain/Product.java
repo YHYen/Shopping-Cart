@@ -8,6 +8,7 @@ public class Product {
     private BigDecimal price;
     private Integer quantity;
     private Integer sellerId;
+    private String imagePath;
 
     public Integer getId() {
         return id;
@@ -49,14 +50,23 @@ public class Product {
         this.sellerId = sellerId;
     }
 
+    public String getImagePath() {
+        return imagePath;
+    }
+
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", ProductName='" + productName + '\'' +
+                ", productName='" + productName + '\'' +
                 ", price=" + price +
                 ", quantity=" + quantity +
                 ", sellerId=" + sellerId +
+                ", imagePath='" + imagePath + '\'' +
                 '}';
     }
 }

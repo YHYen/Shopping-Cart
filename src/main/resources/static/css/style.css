@@ -5,6 +5,7 @@
     --black:#1e2f3f;
     --red:#e74c3c;
     --warn-color:#ff1900;
+    --green:#14804a;
     --light-black:#323e48;
     --link-color:#1b4d76;
     --light-color:#666;
@@ -76,7 +77,8 @@ section{
 }
 
 .btn, 
-.delete-btn{
+.delete-btn, 
+.update-btn{
     display: block;
     width: 100%;
     text-align: center;
@@ -96,8 +98,13 @@ section{
     background-color: var(--red);
 }
 
+.update-btn{
+    background-color: var(--green);
+}
+
 .btn:hover, 
-.delete-btn:hover{
+.delete-btn:hover,
+.update-btn:hover{
     background-color: var(--black);
 }
 
@@ -378,7 +385,8 @@ header .fa-bars{
 .products .box-container{
     display: grid;
     grid-template-columns: repeat(auto-fit, 35rem);
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     gap: 1.5rem;
 }
 
@@ -469,10 +477,22 @@ header .fa-bars{
 
 .order-list .flex{
     display: flex;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-end;
     gap: 2rem;
     margin: 2rem 0;
     border-bottom: var(--border);
+}
+
+.order-list .flex .left{
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.order-list .flex .left .text{
+    display: flex;
+    flex-direction: column;
+    padding-left: 3rem;
 }
 
 .order-list .flex:hover img{
@@ -497,12 +517,33 @@ header .fa-bars{
     text-transform: capitalize;
     overflow-x: hidden;
     text-overflow: ellipsis;
-
 }
 
 .order-list .flex .price{
     font-size: 1.7rem;
     color: var(--red);
+}
+
+.order-list .flex .quantity{
+    font-size: .9rem;
+    color: var(--black);
+}
+
+.order-list .flex .btn-container{
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+}
+
+.order-list .flex .btn-container .delete-btn, .update-btn{
+    
+    width: 100%;
+    text-align: center;
+    margin: .3rem;
+    margin-top: 2.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 1rem;
+    font-size: 1rem;
 }
 
 

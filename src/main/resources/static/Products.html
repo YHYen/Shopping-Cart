@@ -10,48 +10,186 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- custom js file link -->
     <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
     
 </head>
 <body>
-    <!-- header section starts -->
-    <div include-html="header.html"></div>
-    <!-- header section ends -->
+    <div id="app">
+<!-- header section starts -->
+<header class="header">
 
-    <!-- products section starts -->
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="#" class="logo"> LOGO<span>.</span></a>
+        <nav class="navbar">
+            <ul>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="#Shopping Cart">Shopping Cart</a></li>
+                <li><a href="store.html" class="store" id="storeBtn">Store
+                    <icons class="fa fa-angle-double-down"></icons>
+                </a>
+                    <ul id="sellerSubList">
+                        <a href="AddProducts.html">Add Product</a>
+                    </ul>
+                </li>
+                <li><a href="#My_Order">My Order</a></li>
+                <li><a href="login.html" id="loginBtn">Login
+                    <icons class="fa fa-sign-in"></icons>
+                </a></li>
+                <li><a href="#" class="username" id="username">{{username}}
+                    <icons class="fa fa-user"></icons>
+                </a>
+                    <ul id="userSubList">
+                        <li><a href="#My Account">My Account</a></li>
+                        <li><a href="#Track List">Track List</a></li>
+                        <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                        <li><a href="#" id="logoutBtn" @click="logout">Logout
+                            <icons class="fa fa-sign-out"></icons>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+</header>
+<!-- header section ends -->
+
+<!-- products section starts -->
+
+<section class="products">
+
+    <h1 class="heading">all products</h1>
+    <div v-if="haveData" class="box-container">
+        <form v-for="product in products" action="" method="post" class="box">
+            <input type="hidden" name="productId" id="productId" value="product.id">
+            <img :src="'data:image/png;base64,' + product.imagePath" alt="" class="image">
+            <h3 id="productName" class="productName">{{product.productName}}</h3>
+
+            <div class="flex">
+                <p class="price">NT<i class="fas fa-dollar-sign"></i> {{product.price}} </p>
+                <p class="price">{{product.quantity}} Left</p>
+                <input type="number" name="quantity" required maxlength="2" min="1" value="1" max="99" class="quantity">
+            </div>
+            <a href="#checkout.html" class="delete-btn">buy now</a>
+            <input type="button" value="add to cart" name="add_to_cart" class="btn">
+        </form>
+    </div>
+
+    <p v-else class="empty">no products found!</p>
     
-    <section class="products">
+</section>
 
-        <h1 class="heading">all products</h1>
-        <div class="box-container">
-            <form action="" method="post" class="box">
-                <input type="hidden" name="productId" id="productId" value="$productId">
-                <img src="images/user ID Card/Xiu1.JPG" alt="" class="image">
-                <h3 id="productName" class="productName">Product Name</h3>
+<!-- products section ends -->
 
-                <div class="flex">
-                    <p class="price">NT<i class="fas fa-dollar-sign"></i> priceString </p>
-                    <input type="number" name="quantity" required maxlength="2" min="1" value="1" max="99" class="quantity">
-                </div>
-                <a href="#checkout.html" class="delete-btn">buy now</a>
-                <input type="button" value="add to cart" name="add_to_cart" class="btn">
-            </form>
+<!-- footer section starts -->
+<footer class="footer">
+    <section class="grid">
+        <div class="box">
+            <h3>Quick Links</h3>
+            <a href="#home"><i class="fas fa-angle-right"></i>Home</a>
+            <a href="#Products"><i class="fas fa-angle-right"></i>Products</a>
+            <a href="#Add Products"><i class="fas fa-angle-right"></i>Add Products</a>
+            <a href="#My Order"><i class="fas fa-angle-right"></i>My Order</a>
         </div>
 
-        <p class="empty">no products found!</p>
-        
+        <div class="box">
+            <h3>Extra Links</h3>
+            <a href="#Login"><i class="fas fa-angle-right"></i>Login</a>
+            <a href="#Register"><i class="fas fa-angle-right"></i>Register</a>
+            <a href="#Dashboard"><i class="fas fa-angle-right"></i>Dashboard</a>
+        </div>
     </section>
-    
-    <!-- products section ends -->
 
-    <!-- footer section starts -->
-    <div include-html="footer.html"></div>
-    <!-- footer section ends -->
+    <div class="developer">&copy copyright @ 2023 by <span> Hsiu Yen </span> | all rights reserved</div>
+</footer>
+<!-- footer section ends -->
+    </div>
+    
 
     
 
     <!-- loading js method -->
     <script>
-        includeHTML();
+        const {createApp} = Vue
+
+        createApp({
+            data() {
+                return {
+                    username: "",
+                    errMsg: "",
+                    msgColor: "red",
+                    seller: "",
+                    haveData: false,  
+                    products: [],
+                }
+            },
+            mounted() {
+                this.isLogin();
+                this.findAllProducts();
+            },
+            setup() {
+
+            },
+            methods: {
+                findAllProducts(event) {
+                    var _this = this;
+                    axios.get('/products/findAllProducts').then(function (response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            //3. find products
+                            _this.products = response.data.data;
+                            _this.haveData = true;
+                        } else {
+                            //4. product no found
+                            _this.haveData = false;
+                        }
+                    });
+                }, 
+                isLogin(event) {
+                    const _this = this;
+                    axios.get('/users/isLogin').then(function (response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            document.getElementById("loginBtn").style.display = 'none';
+                            document.getElementById("username").style.display = 'block';
+                            document.getElementById("userSubList").style.display = 'block';
+                            _this.username = response.data.data.username;
+                        } else {
+                            document.getElementById("username").style.display = 'none';
+                            document.getElementById("userSubList").style.display = 'none';
+                            document.getElementById("loginBtn").style.display = 'block';
+                            alert(response.data.data.username);
+                            _this.username = "Username";
+                        }
+
+                        if (response.data.data.type == 1) {
+                            document.getElementById("storeBtn").style.display = 'block';
+                            document.getElementById("sellerSubList").style.display = 'block';
+                        } else {
+                            document.getElementById("sellerSubList").style.display = 'none';
+                            document.getElementById("storeBtn").style.display = 'none';
+                        }
+                    });
+                    return;
+                }, 
+                logout(event) {
+                    axios.get('/users/logout').then(function (response) {
+                        document.getElementById("username").style.display = 'none';
+                        document.getElementById("userSubList").style.display = 'none';
+                        document.getElementById("loginBtn").style.display = 'block';
+                        document.getElementById("sellerSubList").style.display = 'none';
+                        document.getElementById("storeBtn").style.display = 'none';
+                        location.href = "/home.html";
+                    });
+                }
+
+
+            }
+        }).mount('#app')
     </script>
 </body>
 </html>

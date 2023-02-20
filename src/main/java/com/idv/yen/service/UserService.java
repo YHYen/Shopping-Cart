@@ -13,7 +13,7 @@ import java.util.List;
 @Service
 public interface UserService {
     Result register(User user);
-    Result updateUserProfile(User user);
+    Result updateUserInfo(User user);
     Result deleteUser(Integer id);
     Result login(String username, String password);
     Result usernameExists(String username);
