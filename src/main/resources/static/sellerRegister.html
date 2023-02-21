@@ -30,7 +30,7 @@
         <nav class="navbar">
             <ul>
                 <li><a href="Products.html">Products</a></li>
-                <li><a href="#Shopping Cart">Shopping Cart</a></li>
+                <li><a href="shoppingCart.html">Shopping Cart</a></li>
                 <li><a href="store.html" class="store" id="storeBtn">Store
                     <icons class="fa fa-angle-double-down"></icons>
                 </a>
@@ -164,20 +164,18 @@
                         document.getElementById("username").style.display = 'block';
                         document.getElementById("userSubList").style.display = 'block';
                         _this.username = response.data.data.username;
+                        if (response.data.data.type == 1) {
+                            document.getElementById("storeBtn").style.display = 'block';
+                            document.getElementById("sellerSubList").style.display = 'block';
+                        } else {
+                            document.getElementById("sellerSubList").style.display = 'none';
+                            document.getElementById("storeBtn").style.display = 'none';
+                        }
                     } else {
                         document.getElementById("username").style.display = 'none';
                         document.getElementById("userSubList").style.display = 'none';
                         document.getElementById("loginBtn").style.display = 'block';
-                        alert(response.data.data.username);
                         _this.username = "Username";
-                    }
-
-                    if (response.data.data.type == 1) {
-                        document.getElementById("storeBtn").style.display = 'block';
-                        document.getElementById("sellerSubList").style.display = 'block';
-                    } else {
-                        document.getElementById("sellerSubList").style.display = 'none';
-                        document.getElementById("storeBtn").style.display = 'none';
                     }
                 });
                 return;

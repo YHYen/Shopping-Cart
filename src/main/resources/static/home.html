@@ -99,7 +99,6 @@
         },
         mounted() {
             this.isLogin();
-            console.log(document.cookie);
         },
         setup() {
 
@@ -115,18 +114,18 @@
                         document.getElementById("username").style.display = 'block';
                         document.getElementById("userSubList").style.display = 'block';
                         _this.username = response.data.data.username;
+
+                        if (response.data.data.type == 1) {
+                            document.getElementById("storeBtn").style.display = 'block';
+                            document.getElementById("sellerSubList").style.display = 'block';
+                        } else {
+                            document.getElementById("sellerSubList").style.display = 'none';
+                            document.getElementById("storeBtn").style.display = 'none';
+                        }
                     } else {
                         document.getElementById("username").style.display = 'none';
                         document.getElementById("userSubList").style.display = 'none';
                         document.getElementById("loginBtn").style.display = 'block';
-                    }
-
-                    if (response.data.data.type == 1) {
-                        document.getElementById("storeBtn").style.display = 'block';
-                        document.getElementById("sellerSubList").style.display = 'block';
-                    } else {
-                        document.getElementById("sellerSubList").style.display = 'none';
-                        document.getElementById("storeBtn").style.display = 'none';
                     }
                 });
                 return;

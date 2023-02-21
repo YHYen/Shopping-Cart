@@ -1,5 +1,6 @@
 package com.idv.yen.domain;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class Cart {
@@ -7,7 +8,10 @@ public class Cart {
     private Integer userId;
     private Integer productId;
     private Integer quantity;
+    private BigDecimal subTotal;
     private Timestamp createTime;
+
+    private Product product;
 
     public Integer getId() {
         return id;
@@ -49,6 +53,22 @@ public class Cart {
         this.createTime = createTime;
     }
 
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
+    public BigDecimal getSubTotal() {
+        return subTotal;
+    }
+
+    public void setSubTotal(BigDecimal subTotal) {
+        this.subTotal = subTotal;
+    }
+
     @Override
     public String toString() {
         return "Cart{" +
@@ -56,7 +76,9 @@ public class Cart {
                 ", userId=" + userId +
                 ", productId=" + productId +
                 ", quantity=" + quantity +
+                ", subTotal=" + subTotal +
                 ", createTime=" + createTime +
+                ", product=" + product +
                 '}';
     }
 }

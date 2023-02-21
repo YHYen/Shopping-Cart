@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class ProductController {
     private ProductService productService;
     private ImageService imageService;
+    
 
     @Autowired
     public ProductController(ProductService productService, ImageService imageService) {

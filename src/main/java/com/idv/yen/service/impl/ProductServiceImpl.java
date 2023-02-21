@@ -178,7 +178,7 @@ public class ProductServiceImpl implements ProductService {
         // 1. get all products information from database
         List<Product> products = productMapper.selectBySellerId(sellerId);
         // 2. determine whether there is data in the database
-        if (products.size() == 0) {
+        if (products.isEmpty()) {
             // 2.1. if there is no data in the database, return false and process message
             return new Result(false, null, "No products found!");
         }

@@ -27,7 +27,7 @@
         <nav class="navbar">
             <ul>
                 <li><a href="Products.html">Products</a></li>
-                <li><a href="#Shopping Cart">Shopping Cart</a></li>
+                <li><a href="shoppingCart.html">Shopping Cart</a></li>
                 <li><a href="store.html" class="store" id="storeBtn">Store
                     <icons class="fa fa-angle-double-down"></icons>
                 </a>
@@ -63,18 +63,17 @@
         <h1 class="heading">all products</h1>
         <div v-if="haveData" class="box-container">
             <form v-for="product in products" action="" method="post" class="box">
-                <input type="hidden" name="productId" id="productId" value="product.id">
                 <img :src="'data:image/png;base64,' + product.imagePath" alt="" class="image">
                 <h3 id="productName" class="productName">{{product.productName}}</h3>
 
                 <div class="flex">
                     <p class="price">NT<i class="fas fa-dollar-sign"></i> {{product.price}} </p>
                     <p class="price">{{product.quantity}} Left</p>
-                    <input type="number" name="quantity" required maxlength="2" min="1" value="1" max="99"
-                           class="quantity">
+                    <!-- <input type="number" v-model="cart.quantity" name="quantity" required maxlength="2" min="1" value="1" max="99"
+                           class="quantity"> -->
                 </div>
-                <a href="#checkout.html" class="delete-btn">buy now</a>
-                <input type="button" value="add to cart" name="add_to_cart" class="btn">
+                <input type="button" value="buy now" name="add_to_order" class="delete-btn" @click="addToOrder(product)">
+                <input type="button" value="add to cart" name="add_to_cart" class="btn" @click="addToCart(product.id)">
             </form>
         </div>
 
@@ -117,11 +116,15 @@
         data() {
             return {
                 username: "",
-                errMsg: "",
+                Msg: "",
                 msgColor: "red",
-                seller: "",
                 haveData: false,
                 products: [],
+                cart: {
+                    userId: "", 
+                    productId: "", 
+                    quantity: 1, 
+                }
             }
         },
         mounted() {
@@ -147,6 +150,24 @@
                     }
                 });
             },
+            addToCart(productId) {
+                var _this = this;
+                this.cart.productId = productId;
+                axios.post('/carts/addToCart', this.cart).then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        console.log(response.data.message);
+                        _this.Msg = response.data.message;
+                    } else {
+                        console.log(response.data.message);
+                        _this.Msg = response.data.message;
+                    }
+                });
+            },
+            addToOrder(product) {
+                
+            },
             isLogin(event) {
                 const _this = this;
                 axios.get('/users/isLogin').then(function (response) {
@@ -157,20 +178,20 @@
                         document.getElementById("username").style.display = 'block';
                         document.getElementById("userSubList").style.display = 'block';
                         _this.username = response.data.data.username;
+                        _this.cart.userId = response.data.data.id;
+
+                        if (response.data.data.type == 1) {
+                            document.getElementById("storeBtn").style.display = 'block';
+                            document.getElementById("sellerSubList").style.display = 'block';
+                        } else {
+                            document.getElementById("sellerSubList").style.display = 'none';
+                            document.getElementById("storeBtn").style.display = 'none';
+                        }
                     } else {
                         document.getElementById("username").style.display = 'none';
                         document.getElementById("userSubList").style.display = 'none';
                         document.getElementById("loginBtn").style.display = 'block';
-                        alert(response.data.data.username);
                         _this.username = "Username";
-                    }
-
-                    if (response.data.data.type == 1) {
-                        document.getElementById("storeBtn").style.display = 'block';
-                        document.getElementById("sellerSubList").style.display = 'block';
-                    } else {
-                        document.getElementById("sellerSubList").style.display = 'none';
-                        document.getElementById("storeBtn").style.display = 'none';
                     }
                 });
                 return;

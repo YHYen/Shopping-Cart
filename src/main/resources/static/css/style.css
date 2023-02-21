@@ -166,7 +166,6 @@ header .navbar ul li ul {
     transform-origin: top;
     transition: .2s ease-out;
     /*
-    
     border-radius: .5rem;
     padding-bottom: 1.5rem; */
 }
@@ -190,6 +189,14 @@ header .navbar ul li .username {
 }
 
 header .navbar ul .store {
+    display: none;
+}
+
+header .navbar ul .store ul {
+    display: none;
+}
+
+header .navbar ul .username ul{
     display: none;
 }
 
@@ -531,6 +538,15 @@ header .fa-bars {
 .order-list .flex .quantity {
     font-size: .9rem;
     color: var(--black);
+}
+
+.order-list .flex .updateQuantity {
+    font-size: 1rem;
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    width: 5rem;
+    color: var(--black);
+    border: var(--border);
 }
 
 .order-list .flex .btn-container {

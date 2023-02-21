@@ -27,7 +27,7 @@
         <nav class="navbar">
             <ul>
                 <li><a href="Products.html">Products</a></li>
-                <li><a href="#Shopping Cart">Shopping Cart</a></li>
+                <li><a href="shoppingCart.html">Shopping Cart</a></li>
                 <li><a href="store.html" class="store" id="storeBtn">Store
                     <icons class="fa fa-angle-double-down"></icons>
                 </a>
@@ -74,7 +74,7 @@
             <p>Product Image <span>*</span></p>
             <input type="file" id="productImage" name="productImage" required accept="image/png,image/jpeg,image/jpg"
                    class="box" @change="changeFile">
-            <input type="button" value="add product" name="addProduct" class="btn" @click="uploadProduct">
+            <input type="button" value="update product" name="updateProduct" class="btn" @click="updateProduct">
         </form>
 
         <!-- <form action="" method="post">
@@ -118,7 +118,6 @@
     var getCookies = function (name) {
         var arr;
         let reg = new RegExp('(^| )' + name + '([^;]*)(;|$)');
-        console.log(reg);
         if (arr = document.cookie.match(reg)) {
             return arr[2];
         } else {
@@ -151,7 +150,7 @@
 
         },
         methods: {
-            uploadProduct(event) {
+            updateProduct(event) {
                 if (this.product.quantity > 99) {
                     this.msgColor = "#ff1900";
                     this.errMsg = "The number of products cannot exceed 99";
@@ -189,20 +188,19 @@
                         document.getElementById("userSubList").style.display = 'block';
                         _this.username = response.data.data.username;
                         _this.userId = response.data.data.id;
+
+                        if (response.data.data.type == 1) {
+                            document.getElementById("storeBtn").style.display = 'block';
+                            document.getElementById("sellerSubList").style.display = 'block';
+                        } else {
+                            document.getElementById("sellerSubList").style.display = 'none';
+                            document.getElementById("storeBtn").style.display = 'none';
+                        }
                     } else {
                         document.getElementById("username").style.display = 'none';
                         document.getElementById("userSubList").style.display = 'none';
                         document.getElementById("loginBtn").style.display = 'block';
-                        alert(response.data.data.username);
                         _this.username = "Username";
-                    }
-
-                    if (response.data.data.type == 1) {
-                        document.getElementById("storeBtn").style.display = 'block';
-                        document.getElementById("sellerSubList").style.display = 'block';
-                    } else {
-                        document.getElementById("sellerSubList").style.display = 'none';
-                        document.getElementById("storeBtn").style.display = 'none';
                     }
                 });
                 return;
