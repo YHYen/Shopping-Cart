@@ -2,6 +2,7 @@ package com.idv.yen.domain;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 
 public class Order {
     private Integer id;
@@ -12,6 +13,8 @@ public class Order {
     private Integer shippingStatus;
     private Timestamp createTime;
     private Timestamp deliveryTime;
+    private List<Cart> carts;
+    private Product product;
 
     public Integer getId() {
         return id;
@@ -77,6 +80,22 @@ public class Order {
         this.deliveryTime = deliveryTime;
     }
 
+    public List<Cart> getCarts() {
+        return carts;
+    }
+
+    public void setCarts(List<Cart> carts) {
+        this.carts = carts;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
@@ -88,6 +107,8 @@ public class Order {
                 ", shippingStatus=" + shippingStatus +
                 ", createTime=" + createTime +
                 ", deliveryTime=" + deliveryTime +
+                ", carts=" + carts +
+                ", product=" + product +
                 '}';
     }
 }

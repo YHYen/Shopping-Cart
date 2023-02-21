@@ -14,11 +14,10 @@ public class CartController {
 
     @Autowired
     public CartController(CartService cartService) {
-
         this.cartService = cartService;
     }
 
-    @PostMapping("addToCart")
+    @PostMapping("/addToCart")
     public Result addToCart(@RequestBody Cart cart) {
         return cartService.addToCart(cart);
     }

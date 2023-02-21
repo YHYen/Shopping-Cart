@@ -6,12 +6,22 @@
 <mapper namespace="com.idv.yen.mapper.OrderMapper">
     <!-- statement -->
     <resultMap id="orderResultMap" type="com.idv.yen.domain.Order">
-        <result column="user_id" property="userId" />
-        <result column="pay_type" property="payType" />
-        <result column="payment_status" property="paymentStatus" />
-        <result column="shipping_status" property="shippingStatus" />
-        <result column="create_time" property="createTime" />
-        <result column="delivery_time" property="deliveryTime" />
+        <result column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="price" property="price"/>
+        <result column="pay_type" property="payType"/>
+        <result column="payment_status" property="paymentStatus"/>
+        <result column="shipping_status" property="shippingStatus"/>
+        <result column="create_time" property="createTime"/>
+        <result column="delivery_time" property="deliveryTime"/>
+
+        <collection property="product" ofType="com.idv.yen.domain.Product">
+            <result column="product_name" property="productName"/>
+            <result column="product_id" property="id"/>
+            <result column="product_price" property="price"/>
+            <result column="quantity" property="quantity"/>
+            <result column="image_path" property="imagePath"/>
+        </collection>
     </resultMap>
 
 </mapper>

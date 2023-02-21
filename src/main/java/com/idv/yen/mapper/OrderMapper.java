@@ -2,6 +2,7 @@ package com.idv.yen.mapper;
 
 
 import com.idv.yen.domain.Cart;
+import com.idv.yen.domain.Order;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
 
@@ -10,74 +11,133 @@ import java.util.List;
 @Component
 public interface OrderMapper {
     /**
-     * query all order information
+     * add order to order table
      *
-     * @return List<Order> return all order information and save them in list
-     */
-    @Result(property = "userId", column = "user_id")
-    @Result(property = "pay_type", column = "pay_type")
-    @Result(property = "shippingStatus", column = "shipping_status")
-    @Select("select " +
-            "   id, user_id, product_id, quantity " +
-            "from " +
-            "   tb_cart ")
-    List<Cart> selectAll();
-
-    /**
-     * use cart id to query cart information
-     *
-     * @param id cart id
-     * @return Cart return the cart information and encapsulate it into Cart object
-     */
-    @Result(property = "userId", column = "user_id")
-    @Result(property = "productId", column = "product_id")
-    @Select("select " +
-            "   user_id, product_id, quantity " +
-            "from " +
-            "   tb_cart " +
-            "where " +
-            "   id = #{id}")
-    Cart selectById(Integer id);
-
-    /**
-     * add cart to cart table
-     *
-     * @param cart cart object containing cart information
+     * @param order order object containing order information
      * @return int the number of rows changed in the database
      */
     @Insert("insert into " +
-            "   tb_cart " +
+            "   tb_order " +
             "values" +
-            "   (null, #{userId}, #{productId}, #{quantity})")
-    int insertProduct(Cart cart);
+            "   (null, " +
+            "   #{userId}, " +
+            "   #{price}, " +
+            "   #{payType}, " +
+            "   #{paymentStatus}, " +
+            "   #{shippingStatus}, " +
+            "   CURRENT_TIMESTAMP, " +
+            "   CURRENT_TIMESTAMP)")
+    int insertOrder(Order order);
+
+    /**
+     * add cart data to order product merge table by user id
+     *
+     *
+     * */
+    @Insert("insert into " +
+            "   tb_order_product" +
+            "   (order_id, product_id, quantity) " +
+            "(SELECT " +
+            "    o.id, cart.product_id, cart.quantity " +
+            "FROM" +
+            "    tb_order AS o, " +
+            "    tb_cart AS cart " +
+            "WHERE " +
+            "    cart.user_id = #{userId} AND o.user_id = #{userId})")
+    int insertOrderProductMergeByUserId(Integer userId);
+
+    /**
+     * delete order by id
+     *
+     * @param orderId order id to delete
+     * @return int the number of rows changed in the database
+     */
+    @Delete("delete " +
+            "   o.*, TOP.* " +
+            "from " +
+            "   tb_order as o ," +
+            "   tb_order_product as TOP " +
+            "where " +
+            "   o.id = #{orderId} AND TOP.order_id = #{orderId}")
+    int deleteByOrderId(Integer orderId);
 
 
     /**
-     * update cart data in cart table by the cart id
+     * update quantity from OrderProductMerge table by orderId and productId
      *
-     * @param cart cart object containing cart information
-     * @return int the number of rows changed in the database
+     * @param orderId   Order id with changes
+     * @param productId The target product whose quantity is to be changed
+     * @param quantity  Quantity to change
      */
     @Update("update " +
-            "   tb_cart " +
+            "   tb_order_product as TOP " +
             "set " +
-            "   user_id = #{userId}, " +
-            "   product_id = #{productId}, " +
-            "   quantity = #{quantity} " +
+            "   TOP.quantity = #{quantity} " +
             "where " +
-            "   id = #{id}")
-    int updateById(Cart cart);
+            "   TOP.order_id = #{orderId} " +
+            "AND " +
+            "   TOP.product_id = #{productId}")
+    int updateQuantityByOrderIdAndProductId(Integer orderId, Integer productId, Integer quantity);
 
 
     /**
-     * delete cart by id
      *
-     * @param id cart id
-     * @return int the number of rows changed in the database
-     */
-    @Delete("delete from " +
-            "   tb_cart " +
+     *
+     *
+     * */
+    @Update("update " +
+            "   tb_order as O " +
+            "set " +
+            "   O.price = #{price} " +
             "where " +
             "   id = #{id}")
-    int deleteById(Integer id);
+    int updatePriceByOrderId(Order order);
+
+
+    /**
+     * query all order information by user id
+     *
+     * @param orderId The order id to query
+     * @return List<Order> return all the order information of this order and save them in list
+     */
+    @ResultMap("orderResultMap")
+    @Select("SELECT " +
+            "    TOP.id AS id," +
+            "    TOP.order_id AS order_id," +
+            "    TOP.quantity AS quantity," +
+            "    product.id AS product_id," +
+            "    product.product_name," +
+            "    product.price AS product_price," +
+            "    product.image_path " +
+            "FROM " +
+            "    tb_order_product AS TOP, " +
+            "    tb_product AS product " +
+            "WHERE " +
+            "    TOP.order_id = #{orderId} " +
+            "        AND product.id = TOP.product_id")
+    List<Order> selectAllProductInOrderByOrderId(Integer orderId);
+
+
+    /**
+     * select all order by user id
+     *
+     * @param userId The user id to query
+     * @return List<Order> return all the order information of user and save them in list
+     */
+    @ResultMap("orderResultMap")
+    @Select("SELECT " +
+            "    id, " +
+            "    user_id, " +
+            "    price, " +
+            "    pay_type, " +
+            "    payment_status, " +
+            "    shipping_status, " +
+            "    create_time, " +
+            "    delivery_time " +
+            "FROM " +
+            "    tb_order " +
+            "WHERE " +
+            "    user_id = #{userId} ")
+    List<Order> selectAllOrderByUserId(Integer userId);
+
 }

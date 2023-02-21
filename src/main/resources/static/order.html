@@ -10,51 +10,191 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- custom js file link -->
     <script src="js/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
 </head>
 <body>
+<div  id="app">
 <!-- header section starts -->
-<div include-html="header.html"></div>
+<header class="header">
+
+    <input type="checkbox" name="" id="toggler">
+    <label for="toggler" class="fas fa-bars"></label>
+
+    <a href="#" class="logo"> LOGO<span>.</span></a>
+    <nav class="navbar">
+        <ul>
+            <li><a href="Products.html">Products</a></li>
+            <li><a href="shoppingCart.html">Shopping Cart</a></li>
+            <li><a href="store.html" class="store" id="storeBtn">Store
+                <icons class="fa fa-angle-double-down"></icons>
+            </a>
+                <ul id="sellerSubList">
+                    <a href="AddProducts.html">Add Product</a>
+                </ul>
+            </li>
+            <li><a href="order.html">My Order</a></li>
+            <li><a href="login.html" id="loginBtn">Login
+                <icons class="fa fa-sign-in"></icons>
+            </a></li>
+            <li><a href="#" class="username" id="username">{{username}}
+                <icons class="fa fa-user"></icons>
+            </a>
+                <ul id="userSubList">
+                    <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                    <li><a href="#" id="logoutBtn" @click="logout">Logout
+                        <icons class="fa fa-sign-out"></icons>
+                    </a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</header>
 <!-- header section ends -->
 
-<!-- products section starts -->
+<!-- order section starts -->
 
-<section class="order">
+<section class="products">
 
-    <h1 class="heading">order</h1>
+    <h1 class="heading">My Orders</h1>
     <div class="order-list">
-        <h3 class="title">Total items</h3>
+        <h3 class="title">all orders</h3>
+        <div v-if="haveData">
+            <div v-for="(order, i) in orders" class="flex">
 
-        <div class="flex">
-            <img src="images/user ID Card/flower1.jpg" alt="">
-            <div>
-                <h3 class="name">Products name</h3>
-                <p class="price">NT<i class="fas fa-dollar-sign"></i> 10000</p>
+                <div class="left">
+                    <div class="text">
+                        <h3 class="name">Order {{i+1}}</h3>
+                        <p class="price">NT<i class="fas fa-dollar-sign"></i> {{order.price}}</p>
+                    </div>
+                </div>
 
+                <div class="btn-container">
+                    <input type="button" value="checkOrder" name="check_order" class="update-btn"
+                               @click="checkOrder(order.id)">
+                    <input type="button" value="Delete" name="delete order" class="delete-btn"
+                           @click="deleteOrder(order.id)">
+                </div>
             </div>
         </div>
-        <div class="flex">
-            <img src="images/user ID Card/flower2.jpg" alt="">
-            <div>
-                <h3 class="name">Products name</h3>
-                <p class="price">NT<i class="fas fa-dollar-sign"></i> 10000</p>
-
-            </div>
-        </div>
+        <p v-else class="empty">no order found!</p>
     </div>
-
 </section>
 
-<!-- products section ends -->
+<!-- order section ends -->
 
 <!-- footer section starts -->
-<div include-html="footer.html"></div>
+<footer class="footer">
+    <div class="developer">&copy copyright @ 2023 by <span> Hsiu Yen </span> | all rights reserved</div>
+</footer>
 <!-- footer section ends -->
-
+</div>
 
 <!-- loading js method -->
 <script>
-    includeHTML();
+    const {createApp} = Vue
+
+    createApp({
+        data() {
+            return {
+                username: "",
+                userId: "",
+                haveData: false,
+                orders: [],
+                order: {
+                    userId: "",
+                    price: "", 
+                    carts: [],
+                }, 
+            }
+        },
+        mounted() {
+            this.isLogin();
+        },
+        setup() {
+
+        },
+        methods: {
+            findUserOrder(event) {
+                const _this = this;
+                axios.get('orders/findUserOrder/' + this.userId).then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        //3. find products
+                        _this.orders = response.data.data;
+                        _this.haveData = true;
+                    } else {
+                        //4. product no found
+                        _this.haveData = false;
+                    }
+                });
+            },
+            checkOrder(orderId) {
+                document.cookie = 'id=' + orderId;
+                var cookie = document.cookie;
+                setTimeout(function () {
+                    window.location.href = "/checkOrder.html";
+                }, 10);
+            }, 
+            deleteOrder(id) {
+                axios.delete('orders/deleteOrder/' + id).then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        console.log(response.data.message);
+                    } else {
+                        console.log(response.data.message);
+                    }
+                }).finally(() => {
+                    this.findUserOrder();
+                });
+            }, 
+            isLogin(event) {
+                const _this = this;
+                axios.get('/users/isLogin').then(function (response) {
+                    //1. get response data
+                    //2. determine whether flag is true
+                    if (response.data.flag) {
+                        document.getElementById("loginBtn").style.display = 'none';
+                        document.getElementById("username").style.display = 'block';
+                        document.getElementById("userSubList").style.display = 'block';
+                        _this.username = response.data.data.username;
+                        _this.userId = response.data.data.id;
+
+                        if (response.data.data.type == 1) {
+                            document.getElementById("storeBtn").style.display = 'block';
+                            document.getElementById("sellerSubList").style.display = 'block';
+                        } else {
+                            document.getElementById("sellerSubList").style.display = 'none';
+                            document.getElementById("storeBtn").style.display = 'none';
+                        }
+                    } else {
+                        document.getElementById("username").style.display = 'none';
+                        document.getElementById("userSubList").style.display = 'none';
+                        document.getElementById("loginBtn").style.display = 'block';
+                        _this.username = "Username";
+                    }
+
+                    
+                }).finally(() => {
+                    this.findUserOrder();
+                });
+            },
+            logout(event) {
+                axios.get('/users/logout').then(function (response) {
+                    document.getElementById("username").style.display = 'none';
+                    document.getElementById("userSubList").style.display = 'none';
+                    document.getElementById("loginBtn").style.display = 'block';
+                    document.getElementById("sellerSubList").style.display = 'none';
+                    document.getElementById("storeBtn").style.display = 'none';
+                    location.href = "/home.html";
+                });
+            }
+        }
+    }).mount('#app')
 </script>
 </body>
 </html>

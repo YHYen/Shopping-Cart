@@ -85,6 +85,13 @@ public interface CartMapper {
             "   id = #{id}")
     Cart selectById(Integer id);
 
+    /**
+     * use user id and product id to query cart information
+     *
+     * @param userId user id
+     * @param productId product id
+     * @return Cart return the cart information and encapsulate it into Cart object
+     * */
     @ResultMap("cartResultMap")
     @Select("select " +
             "   id, " +

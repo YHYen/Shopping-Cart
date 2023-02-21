@@ -10,7 +10,6 @@ public class Cart {
     private Integer quantity;
     private BigDecimal subTotal;
     private Timestamp createTime;
-
     private Product product;
 
     public Integer getId() {

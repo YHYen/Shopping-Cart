@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Products</title>
+    <title>Shopping Cart</title>
 
     <!-- custom css file link -->
     <link rel="stylesheet" href="css/style.css">
@@ -13,70 +13,75 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-
 </head>
 <body>
 <div id="app">
-<!-- header section starts -->
-<header class="header">
+    <!-- header section starts -->
+    <header class="header">
 
-    <input type="checkbox" name="" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
 
-    <a href="#" class="logo"> LOGO<span>.</span></a>
-    <nav class="navbar">
-        <ul>
-            <li><a href="Products.html">Products</a></li>
-            <li><a href="shoppingCart.html">Shopping Cart</a></li>
-            <li><a href="store.html" class="store" id="storeBtn">Store
-                <icons class="fa fa-angle-double-down"></icons>
-            </a>
-                <ul id="sellerSubList">
-                    <a href="AddProducts.html">Add Product</a>
-                </ul>
-            </li>
-            <li><a href="order.html">My Order</a></li>
-            <li><a href="login.html" id="loginBtn">Login
-                <icons class="fa fa-sign-in"></icons>
-            </a></li>
-            <li><a href="#" class="username" id="username">{{username}}
-                <icons class="fa fa-user"></icons>
-            </a>
-                <ul id="userSubList">
-                    <li><a href="sellerRegister.html">Become<br>a seller</a></li>
-                    <li><a href="#" id="logoutBtn" @click="logout">Logout
-                        <icons class="fa fa-sign-out"></icons>
-                    </a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-</header>
-<!-- header section ends -->
+        <a href="#" class="logo"> LOGO<span>.</span></a>
+        <nav class="navbar">
+            <ul>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="shoppingCart.html">Shopping Cart</a></li>
+                <li><a href="store.html" class="store" id="storeBtn">Store
+                    <icons class="fa fa-angle-double-down"></icons>
+                </a>
+                    <ul id="sellerSubList">
+                        <a href="AddProducts.html">Add Product</a>
+                    </ul>
+                </li>
+                <li><a href="order.html">My Order</a></li>
+                <li><a href="login.html" id="loginBtn">Login
+                    <icons class="fa fa-sign-in"></icons>
+                </a></li>
+                <li><a href="#" class="username" id="username">{{username}}
+                    <icons class="fa fa-user"></icons>
+                </a>
+                    <ul id="userSubList">
+                        <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                        <li><a href="#" id="logoutBtn" @click="logout">Logout
+                            <icons class="fa fa-sign-out"></icons>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- header section ends -->
 
     <!-- products section starts -->
 
     <section class="products">
 
-        <h1 class="heading">all products</h1>
-        <div v-if="haveData" class="box-container">
-            <form v-for="product in products" action="" method="post" class="box">
-                <img :src="'data:image/png;base64,' + product.imagePath" alt="" class="image">
-                <h3 id="productName" class="productName">{{product.productName}}</h3>
+        <h1 class="heading">Order Product</h1>
+        <div class="order-list">
+            <h3 class="title">all products</h3>
+            <div v-if="haveData">
+                <div v-for="order in orders" class="flex">
 
-                <div class="flex">
-                    <p class="price">NT<i class="fas fa-dollar-sign"></i> {{product.price}} </p>
-                    <p class="price">{{product.quantity}} Left</p>
-                    <!-- <input type="number" v-model="cart.quantity" name="quantity" required maxlength="2" min="1" value="1" max="99"
-                           class="quantity"> -->
+                    <div class="left">
+                        <img :src="'data:image/png;base64,' + order.product.imagePath" alt="">
+                        <div class="text">
+                            <h3 class="name">{{order.product.productName}}</h3>
+                            <p class="price">NT<i class="fas fa-dollar-sign"></i> {{order.price}}</p>
+                            <p class="quantity">Quantity: {{order.product.quantity}}</p>
+                        </div>
+
+                    </div>
                 </div>
-                <input type="button" value="buy now" name="add_to_order" class="delete-btn" @click="addToOrder(product)">
-                <input type="button" value="add to cart" name="add_to_cart" class="btn" @click="addToCart(product.id)">
-            </form>
+            </div>
+            <p v-else class="empty">no products found!</p>
         </div>
 
-        <p v-else class="empty">no products found!</p>
+        <div class="total">
+            <p>total cost : NT<i class="fas fa-dollar-sign"></i> <span>{{getTotal}}</span></p>
+            <input type="button" value="delete Order" name="deleteOrder" class="delete-btn" @click="deleteOrder">
 
+        </div>
     </section>
 
     <!-- products section ends -->
@@ -86,44 +91,58 @@
         <div class="developer">&copy copyright @ 2023 by <span> Hsiu Yen </span> | all rights reserved</div>
     </footer>
     <!-- footer section ends -->
+
 </div>
 
 
 <!-- loading js method -->
 <script>
+
+    var getCookies = function (name) {
+        var arr;
+        let reg = new RegExp('(^| )' + name + '([^;]*)(;|$)');
+        if (arr = document.cookie.match(reg)) {
+            return arr[2];
+        } else {
+            return null;
+        }
+    };
+
     const {createApp} = Vue
 
     createApp({
         data() {
             return {
                 username: "",
-                Msg: "",
-                msgColor: "red",
+                orderId: getCookies('id='),
                 haveData: false,
-                products: [],
-                cart: {
-                    userId: "", 
-                    productId: "", 
-                    quantity: 1, 
-                }
+                orders: [],
             }
         },
         mounted() {
             this.isLogin();
-            this.findAllProducts();
         },
         setup() {
 
         },
+        computed: {
+            getTotal() {
+                let total = 0;
+                this.orders.map((order, index) => {
+                    total += order.price;
+                })
+                return total;
+            }
+        },
         methods: {
-            findAllProducts(event) {
-                var _this = this;
-                axios.get('/products/findAllProducts').then(function (response) {
+            findOrderProduct(event) {
+                const _this = this;
+                axios.get('orders/findOrderProduct/' + this.orderId).then(function (response) {
                     //1. get response data
                     //2. determine whether flag is true
                     if (response.data.flag) {
                         //3. find products
-                        _this.products = response.data.data;
+                        _this.orders = response.data.data;
                         _this.haveData = true;
                     } else {
                         //4. product no found
@@ -131,23 +150,23 @@
                     }
                 });
             },
-            addToCart(productId) {
-                var _this = this;
-                this.cart.productId = productId;
-                axios.post('/carts/addToCart', this.cart).then(function (response) {
+            deleteOrder() {
+                axios.delete('orders/deleteOrder/' + this.orderId).then(function (response) {
                     //1. get response data
                     //2. determine whether flag is true
                     if (response.data.flag) {
                         console.log(response.data.message);
-                        _this.Msg = response.data.message;
+                        setTimeout(function () {
+                            window.location.href = "/order.html";
+                        }, 10);
                     } else {
                         console.log(response.data.message);
-                        _this.Msg = response.data.message;
                     }
                 });
             },
-            addToOrder(product) {
-                
+            countSubTotal(order) {
+                order.price = order.product.quantity * order.product.price;
+                // console.log(this.getTotal);
             },
             isLogin(event) {
                 const _this = this;
@@ -159,7 +178,7 @@
                         document.getElementById("username").style.display = 'block';
                         document.getElementById("userSubList").style.display = 'block';
                         _this.username = response.data.data.username;
-                        _this.cart.userId = response.data.data.id;
+                        _this.userId = response.data.data.id;
 
                         if (response.data.data.type == 1) {
                             document.getElementById("storeBtn").style.display = 'block';
@@ -174,8 +193,11 @@
                         document.getElementById("loginBtn").style.display = 'block';
                         _this.username = "Username";
                     }
+
+
+                }).finally(() => {
+                    this.findOrderProduct();
                 });
-                return;
             },
             logout(event) {
                 axios.get('/users/logout').then(function (response) {

@@ -14,8 +14,7 @@ import java.util.List;
 @Service
 public class CartServiceImpl implements CartService {
 
-    private CartMapper cartMapper;
-    private ImageUtil imageUtil;
+    private final CartMapper cartMapper;
 
     @Autowired
     public CartServiceImpl(CartMapper cartMapper) {
@@ -82,11 +81,11 @@ public class CartServiceImpl implements CartService {
      */
     @Override
     public Result findUserCart(Integer userId) {
-        // 1. get all cart information from database
+        // 1. get all cart information from cart table
         List<Cart> carts = cartMapper.selectAllProductInCartByUserId(userId);
-        // 2. determine whether there is data in the database
+        // 2. determine whether there is data in cart table
         if (carts.isEmpty()) {
-            // 2.1. if there is no data in the database, return false and process message
+            // 2.1. if there is no data in cart table, return false and process message
             return new Result(false, null, "No products found!");
         }
 
@@ -96,7 +95,7 @@ public class CartServiceImpl implements CartService {
             String imagePath = cart.getProduct().getImagePath();
 
             // 3.2. get product base64Image with imageUtil
-            imageUtil = new ImageUtil();
+            ImageUtil imageUtil = new ImageUtil();
             String base64Image = imageUtil.getBase64Image(imagePath);
 
             // 3.3. set product base64Image to product path
