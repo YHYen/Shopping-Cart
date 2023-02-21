@@ -6,17 +6,17 @@
 <mapper namespace="com.idv.yen.mapper.CartMapper">
     <!-- statement -->
     <resultMap id="cartResultMap" type="com.idv.yen.domain.Cart">
-        <result column="cart_id" property="id" />
-        <result column="user_id" property="userId" />
-        <result column="product_id" property="productId" />
-        <result column="cart_quantity" property="quantity" />
-        <result column="create_time" property="createTime" />
+        <result column="cart_id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="product_id" property="productId"/>
+        <result column="cart_quantity" property="quantity"/>
+        <result column="create_time" property="createTime"/>
 
         <collection property="product" ofType="com.idv.yen.domain.Product">
-            <result column="product_name" property="productName" />
-            <result column="product_id" property="id" />
-            <result column="product_price" property="price" />
-            <result column="image_path" property="imagePath" />
+            <result column="product_name" property="productName"/>
+            <result column="product_id" property="id"/>
+            <result column="product_price" property="price"/>
+            <result column="image_path" property="imagePath"/>
         </collection>
     </resultMap>
 </mapper>

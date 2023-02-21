@@ -1,5 +1,5 @@
 function get(path) {
-    axios.get(path).then(function (response){
+    axios.get(path).then(function (response) {
         if (response.data == 'successful') {
             swal("Good job", "added successfully", "success");
         } else {
@@ -9,7 +9,7 @@ function get(path) {
 }
 
 function get(path, JSONString) {
-    axios.get(path).then(function (response){
+    axios.get(path).then(function (response) {
         if (response.data == 'successful') {
             swal("Good job", "added successfully", "success");
         } else {
@@ -19,7 +19,7 @@ function get(path, JSONString) {
 }
 
 function post(path) {
-    axios.get(path).then(function (response){
+    axios.get(path).then(function (response) {
         if (response.data == 'successful') {
             swal("Good job", "added successfully", "success");
         } else {
@@ -29,7 +29,7 @@ function post(path) {
 }
 
 function post(path, JSONString) {
-    axios.get(path).then(function (response){
+    axios.get(path).then(function (response) {
         if (response.data == 'successful') {
             swal("Good job", "added successfully", "success");
         } else {

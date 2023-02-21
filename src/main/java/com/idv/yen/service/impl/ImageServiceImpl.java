@@ -1,15 +1,11 @@
 package com.idv.yen.service.impl;
 
-import com.idv.yen.controller.UserController;
 import com.idv.yen.domain.Image;
-import com.idv.yen.domain.Product;
-import com.idv.yen.domain.User;
 import com.idv.yen.mapper.ImageMapper;
 import com.idv.yen.service.ImageService;
 import com.idv.yen.service.Utils.ImageUtil;
 import com.idv.yen.service.Utils.Result;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -23,7 +19,7 @@ import java.io.*;
  */
 @Service
 public class ImageServiceImpl implements ImageService {
-    private ImageMapper imageMapper;
+    private final ImageMapper imageMapper;
     private ImageUtil imageUtil;
     private File path = new File("");
 
@@ -96,14 +92,6 @@ public class ImageServiceImpl implements ImageService {
             return new Result(false);
         return new Result(true);
     }
-
-    /**
-     * Image upload: upload product image
-     * @param file product image file
-     * @param product product object to get product id
-     * @return Result whether the image upload successful and process message
-     * */
-
 
     /**
      * Find images from a specific seller

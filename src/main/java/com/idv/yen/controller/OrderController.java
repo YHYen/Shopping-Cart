@@ -27,7 +27,7 @@ public class OrderController {
      *
      * @param order order object containing order information
      * @return Result whether the order is added and cart is deleted successfully and process message
-     * */
+     */
     @PostMapping("/addOrder")
     public Result addOrder(@RequestBody Order order) {
         // 1. Add data to order and order_product_merge table

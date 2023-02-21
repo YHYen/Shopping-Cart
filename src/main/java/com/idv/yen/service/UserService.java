@@ -5,8 +5,6 @@ import com.idv.yen.service.Utils.Result;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 /**
  * all required method related to the user
  */

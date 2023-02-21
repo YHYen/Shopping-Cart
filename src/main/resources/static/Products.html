@@ -17,42 +17,42 @@
 </head>
 <body>
 <div id="app">
-<!-- header section starts -->
-<header class="header">
+    <!-- header section starts -->
+    <header class="header">
 
-    <input type="checkbox" name="" id="toggler">
-    <label for="toggler" class="fas fa-bars"></label>
+        <input type="checkbox" name="" id="toggler">
+        <label for="toggler" class="fas fa-bars"></label>
 
-    <a href="#" class="logo"> LOGO<span>.</span></a>
-    <nav class="navbar">
-        <ul>
-            <li><a href="Products.html">Products</a></li>
-            <li><a href="shoppingCart.html">Shopping Cart</a></li>
-            <li><a href="store.html" class="store" id="storeBtn">Store
-                <icons class="fa fa-angle-double-down"></icons>
-            </a>
-                <ul id="sellerSubList">
-                    <a href="AddProducts.html">Add Product</a>
-                </ul>
-            </li>
-            <li><a href="order.html">My Order</a></li>
-            <li><a href="login.html" id="loginBtn">Login
-                <icons class="fa fa-sign-in"></icons>
-            </a></li>
-            <li><a href="#" class="username" id="username">{{username}}
-                <icons class="fa fa-user"></icons>
-            </a>
-                <ul id="userSubList">
-                    <li><a href="sellerRegister.html">Become<br>a seller</a></li>
-                    <li><a href="#" id="logoutBtn" @click="logout">Logout
-                        <icons class="fa fa-sign-out"></icons>
-                    </a></li>
-                </ul>
-            </li>
-        </ul>
-    </nav>
-</header>
-<!-- header section ends -->
+        <a href="#" class="logo"> LOGO<span>.</span></a>
+        <nav class="navbar">
+            <ul>
+                <li><a href="Products.html">Products</a></li>
+                <li><a href="shoppingCart.html">Shopping Cart</a></li>
+                <li><a href="store.html" class="store" id="storeBtn">Store
+                    <icons class="fa fa-angle-double-down"></icons>
+                </a>
+                    <ul id="sellerSubList">
+                        <a href="AddProducts.html">Add Product</a>
+                    </ul>
+                </li>
+                <li><a href="order.html">My Order</a></li>
+                <li><a href="login.html" id="loginBtn">Login
+                    <icons class="fa fa-sign-in"></icons>
+                </a></li>
+                <li><a href="#" class="username" id="username">{{username}}
+                    <icons class="fa fa-user"></icons>
+                </a>
+                    <ul id="userSubList">
+                        <li><a href="sellerRegister.html">Become<br>a seller</a></li>
+                        <li><a href="#" id="logoutBtn" @click="logout">Logout
+                            <icons class="fa fa-sign-out"></icons>
+                        </a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <!-- header section ends -->
 
     <!-- products section starts -->
 
@@ -70,7 +70,8 @@
                     <!-- <input type="number" v-model="cart.quantity" name="quantity" required maxlength="2" min="1" value="1" max="99"
                            class="quantity"> -->
                 </div>
-                <input type="button" value="buy now" name="add_to_order" class="delete-btn" @click="addToOrder(product)">
+                <input type="button" value="buy now" name="add_to_order" class="delete-btn"
+                       @click="addToOrder(product)">
                 <input type="button" value="add to cart" name="add_to_cart" class="btn" @click="addToCart(product.id)">
             </form>
         </div>
@@ -102,9 +103,9 @@
                 haveData: false,
                 products: [],
                 cart: {
-                    userId: "", 
-                    productId: "", 
-                    quantity: 1, 
+                    userId: "",
+                    productId: "",
+                    quantity: 1,
                 }
             }
         },
@@ -147,7 +148,7 @@
                 });
             },
             addToOrder(product) {
-                
+
             },
             isLogin(event) {
                 const _this = this;

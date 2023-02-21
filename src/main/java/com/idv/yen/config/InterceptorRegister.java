@@ -1,6 +1,5 @@
 package com.idv.yen.config;
 
-import com.idv.yen.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +13,7 @@ import java.util.List;
 /**
  * register interceptor
  */
-//@Configuration
+@Configuration
 public class InterceptorRegister implements WebMvcConfigurer {
 
     private UserInterceptor userInterceptor;
@@ -43,12 +42,13 @@ public class InterceptorRegister implements WebMvcConfigurer {
         pathPattern.add("/login.html");
         pathPattern.add("/Products.html");
         pathPattern.add("/register.html");
+        pathPattern.add("/users/login");
         pathPattern.add("/users/isLogin");
         pathPattern.add("/users/register");
         pathPattern.add("/users/findUsername/**");
-        pathPattern.add("/users/login");
+        pathPattern.add("/products/findAllProducts");
+
         // temp path
-        pathPattern.add("/images/product");
         interceptorRegistry.addInterceptor(userInterceptor).excludePathPatterns(pathPattern).order(1);
     }
 }

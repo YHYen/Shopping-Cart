@@ -3,16 +3,11 @@ package com.idv.yen.service.impl;
 import com.idv.yen.controller.UserController;
 import com.idv.yen.domain.User;
 import com.idv.yen.mapper.UserMapper;
-import com.idv.yen.service.ImageService;
 import com.idv.yen.service.UserService;
 import com.idv.yen.service.Utils.Result;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-
-import java.util.List;
 
 /**
  * use to implement the UserService interface
@@ -20,7 +15,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
 
     @Autowired
     public UserServiceImpl(UserMapper userMapper) {

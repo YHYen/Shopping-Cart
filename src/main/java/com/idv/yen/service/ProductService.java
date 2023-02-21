@@ -4,8 +4,6 @@ import com.idv.yen.domain.Product;
 import com.idv.yen.service.Utils.Result;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.List;
-
 /**
  * all required method related to the Product
  */

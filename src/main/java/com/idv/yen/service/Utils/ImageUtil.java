@@ -1,9 +1,6 @@
 package com.idv.yen.service.Utils;
 
-import com.idv.yen.domain.Image;
-import jakarta.servlet.http.HttpServletResponse;
 import org.apache.commons.io.IOUtils;
-import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;
@@ -73,6 +70,7 @@ public class ImageUtil {
     public String getBase64Image(String path) {
         try {
             InputStream imgInputStream = getImgInputStream(path);
+            assert imgInputStream != null;
             byte[] bytes = IOUtils.toByteArray(imgInputStream);
             imgInputStream.close();
             return Base64.getEncoder().encodeToString(bytes);

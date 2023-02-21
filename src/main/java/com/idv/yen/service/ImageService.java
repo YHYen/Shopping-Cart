@@ -1,10 +1,8 @@
 package com.idv.yen.service;
 
 import com.idv.yen.domain.Image;
-import com.idv.yen.domain.Product;
 import com.idv.yen.service.Utils.Result;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 

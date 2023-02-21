@@ -1,11 +1,9 @@
 package com.idv.yen.controller;
 
-import com.idv.yen.service.ImageService;
-import com.idv.yen.service.Utils.Result;
 import com.idv.yen.domain.Product;
+import com.idv.yen.service.ImageService;
 import com.idv.yen.service.ProductService;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import com.idv.yen.service.Utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,14 +11,12 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/products")
 public class ProductController {
-    private ProductService productService;
-    private ImageService imageService;
-    
+    private final ProductService productService;
+
 
     @Autowired
-    public ProductController(ProductService productService, ImageService imageService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
-        this.imageService = imageService;
     }
 
     @PostMapping("/addProduct")

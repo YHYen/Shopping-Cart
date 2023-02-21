@@ -1,11 +1,10 @@
 package com.idv.yen.controller;
 
-import com.idv.yen.service.ImageService;
-import com.idv.yen.service.Utils.Result;
 import com.idv.yen.domain.User;
+import com.idv.yen.service.ImageService;
 import com.idv.yen.service.UserService;
+import com.idv.yen.service.Utils.Result;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +15,8 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/users")
 public class UserController {
     public static final String SESSION_NAME = "userinfo";
-    private UserService userService;
-    private ImageService imageService;
+    private final UserService userService;
+    private final ImageService imageService;
 
     @Autowired
     public UserController(UserService userService, ImageService imageService) {
@@ -86,6 +85,7 @@ public class UserController {
     public Result logout(HttpServletRequest httpServletRequest) {
         // clear session data
         httpServletRequest.getSession().setAttribute(SESSION_NAME, null);
+        httpServletRequest.getSession().invalidate();
         return new Result(true, "Logout successful");
     }
 

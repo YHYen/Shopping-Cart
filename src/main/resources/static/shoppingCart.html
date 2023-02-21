@@ -69,16 +69,17 @@
                             <h3 class="name">{{cart.product.productName}}</h3>
                             <p class="price">NT<i class="fas fa-dollar-sign"></i> {{cart.subTotal}}</p>
                             <div id="quantity">
-                                Quantity : <input type="number" v-model="cart.quantity" name="quantity" required maxlength="2" min="1" value="1" max="99"
-                           class="updateQuantity" @change="countSubTotal(cart)">
+                                Quantity : <input type="number" v-model="cart.quantity" name="quantity" required
+                                                  maxlength="2" min="1" value="1" max="99"
+                                                  class="updateQuantity" @change="countSubTotal(cart)">
                             </div>
-                            
+
                         </div>
 
                     </div>
 
                     <div class="btn-container">
-                        
+
                         <input type="button" value="Update" name="add_to_cart" class="update-btn"
                                @click="updateCart(cart)">
                         <input type="button" value="Delete" name="delete_product" class="delete-btn"
@@ -121,9 +122,9 @@
                 carts: [],
                 order: {
                     userId: "",
-                    price: "", 
+                    price: "",
                     carts: [],
-                }, 
+                },
             }
         },
         mounted() {
@@ -132,7 +133,7 @@
         setup() {
 
         },
-        computed:{
+        computed: {
             getTotal() {
                 let total = 0;
                 this.carts.map((cart, index) => {
@@ -140,7 +141,7 @@
                 })
                 return total;
             }
-        }, 
+        },
         methods: {
             findUserCart(event) {
                 const _this = this;
@@ -201,11 +202,11 @@
                 }).finally(() => {
                     this.findUserCart();
                 });
-            }, 
-            countSubTotal(cart) {               
+            },
+            countSubTotal(cart) {
                 cart.subTotal = cart.quantity * cart.product.price;
                 // console.log(this.getTotal);
-            }, 
+            },
             checkout() {
                 this.order.userId = this.userId;
                 this.order.price = this.getTotal;
@@ -213,7 +214,7 @@
                 axios.post('/orders/addOrder', this.order).then(function (response) {
                     //1. get response data
                     //2. determine whether flag is true
-                    if(response.data.flag) {
+                    if (response.data.flag) {
                         console.log(response.data.message);
                     } else {
                         console.log(response.data.message);
@@ -221,7 +222,7 @@
                 }).finally(() => {
                     this.findUserCart();
                 });
-            }, 
+            },
             isLogin(event) {
                 const _this = this;
                 axios.get('/users/isLogin').then(function (response) {
@@ -248,7 +249,7 @@
                         _this.username = "Username";
                     }
 
-                    
+
                 }).finally(() => {
                     this.findUserCart();
                 });

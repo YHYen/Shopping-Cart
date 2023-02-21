@@ -5,19 +5,15 @@ import com.idv.yen.mapper.ProductMapper;
 import com.idv.yen.service.ProductService;
 import com.idv.yen.service.Utils.ImageUtil;
 import com.idv.yen.service.Utils.Result;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ProductServiceImpl implements ProductService {
-    private ProductMapper productMapper;
+    private final ProductMapper productMapper;
     private ImageUtil imageUtil;
 
     @Autowired

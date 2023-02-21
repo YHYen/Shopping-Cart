@@ -1,7 +1,6 @@
 package com.idv.yen.mapper;
 
 
-import com.idv.yen.domain.Cart;
 import com.idv.yen.domain.Order;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
@@ -32,8 +31,9 @@ public interface OrderMapper {
     /**
      * add cart data to order product merge table by user id
      *
-     *
-     * */
+     * @param userId user id to add cart
+     * @return int the number of rows changed in the database
+     */
     @Insert("insert into " +
             "   tb_order_product" +
             "   (order_id, product_id, quantity) " +
@@ -82,9 +82,7 @@ public interface OrderMapper {
 
     /**
      *
-     *
-     *
-     * */
+     */
     @Update("update " +
             "   tb_order as O " +
             "set " +
