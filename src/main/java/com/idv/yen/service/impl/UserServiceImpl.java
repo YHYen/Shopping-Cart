@@ -32,6 +32,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public Result register(User user) {
 
+        if (user.getPassword() == null || user.getConfirmPassword() == null ) {
+            return new Result(false, "Password not filled");
+        }
+
         if (!user.getPassword().equals(user.getConfirmPassword())) {
             return new Result(false, "The two sets of passwords do not match");
         }

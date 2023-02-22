@@ -91,25 +91,26 @@
         methods: {
             submitForm(event) {
                 const _this = this;
-                var emailRegxp = /^([\w]+)(.[\w]+)*@([\w]+)(.[\w]{2,3}){1,2}$/;
-                if (this.errMsg == "This username already exists") {
+                var emailRegxp = /^([a-zA-Z0-9_\.\-\+])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                if (_this.errMsg == "This username already exists") {
                     Swal.fire({
                         icon: 'error', 
                         title: 'This username already exists', 
                         text: "Find a name that's cooler than the others"
                     });
-                } else if (this.formData.email = '') {
+                } else if (_this.formData.email == '') {
+                    console.log(this.formData.email);
                     Swal.fire({
                         icon: 'error', 
                         title: 'You did not fill in the email address', 
                         text: "Fill in the email address and let us contact you"
                     });
-                } else if(emailRegxp.test(this.formData.email) != true) {
+                } else if(emailRegxp.test(_this.formData.email) != true) {
                     Swal.fire({
                         icon: 'error', 
                         title: 'Email format error'
                     });
-                } else if (this.formData.password == '' || this.formData.confirmPassword == '') {
+                } else if (_this.formData.password == '' || _this.formData.confirmPassword == '') {
                     Swal.fire({
                         icon: 'error', 
                         title: 'Password not filled', 
@@ -127,10 +128,17 @@
                             }, 1500);
                         } else {
                             //4. Registration failed, show error message
-                            _this.msgColor = "#ff1900";
-                            Swal.fire(response.data.message, "", "error");
-                            _this.formData.password = "";
-                            _this.formData.confirmPassword = "";
+                            if (response.data.message == 'Password not filled') {
+                                Swal.fire({
+                                    icon: 'error', 
+                                    title: 'Password not filled', 
+                                    text: "For security reasons, please fill in"
+                                });
+                            } else {
+                                Swal.fire(response.data.message, "", "error");
+                                _this.formData.password = "";
+                                _this.formData.confirmPassword = "";
+                            }
                         }
                     });
                 }
@@ -143,11 +151,12 @@
                     let userExists = response.data.flag;
                     if (userExists) {
                         _this.msgColor = "#ff1900";
-                        Swal.fire(response.data.message, "", "success");
+                        _this.errMsg = response.data.message;
+                        // Swal.fire(response.data.message, "", "error");
                     } else {
                         _this.msgColor = "#38944f";
                         _this.errMsg = response.data.message;
-                        Swal.fire(response.data.message, "", "error");
+                        // Swal.fire(response.data.message, "", "success");
 
                     }
                 });
