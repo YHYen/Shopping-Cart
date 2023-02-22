@@ -44,7 +44,17 @@ public interface OrderMapper {
             "    tb_cart AS cart " +
             "WHERE " +
             "    cart.user_id = #{userId} AND o.user_id = #{userId})")
-    int insertOrderProductMergeByUserId(Integer userId);
+    int insertOrderProductMergeFromCartTableByUserId(Integer userId);
+
+
+    @Insert("insert into" +
+            "    tb_order_product " +
+            "values" +
+            "   (null, " +
+            "   LAST_INSERT_ID(), " +
+            "   #{productId}, " +
+            "   #{quantity})")
+    int insertOrderProductMergeByProduct(Integer productId, Integer quantity);
 
     /**
      * delete order by id

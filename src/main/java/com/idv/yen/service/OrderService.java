@@ -11,6 +11,8 @@ import org.springframework.stereotype.Service;
 public interface OrderService {
     Result addOrder(Order order);
 
+    Result addProductToOrder(Order order);
+
     Result deleteOrderById(Integer orderId);
 
     Result selectAllProductInOrder(Integer orderId);

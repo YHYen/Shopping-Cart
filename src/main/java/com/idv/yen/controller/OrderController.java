@@ -47,6 +47,11 @@ public class OrderController {
         return new Result(false, "Failed to add order information");
     }
 
+    @PostMapping("/addProductToOrder")
+    public Result addProductToOrder(@RequestBody Order order) {
+        return orderService.addProductToOrder(order);
+    }
+
     @GetMapping("/findUserOrder/{userId}")
     public Result findUserOrder(@PathVariable Integer userId) {
         return orderService.selectAllOrderByUserId(userId);

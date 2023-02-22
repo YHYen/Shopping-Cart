@@ -35,9 +35,6 @@ public class InterceptorRegister implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry interceptorRegistry) {
         List<String> pathPattern = new ArrayList<>();
         pathPattern.add("/css/style.css");
-        pathPattern.add("/js/script.js");
-        pathPattern.add("/footer.html");
-        pathPattern.add("/header.html");
         pathPattern.add("/home.html");
         pathPattern.add("/login.html");
         pathPattern.add("/Products.html");

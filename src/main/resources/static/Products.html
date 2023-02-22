@@ -29,10 +29,11 @@
             <ul>
                 <li><a href="Products.html">Products</a></li>
                 <li><a href="shoppingCart.html">Shopping Cart</a></li>
-                <li><a href="store.html" class="store" id="storeBtn">Store
+                <li><a href="#" class="store" id="storeBtn">My Store
                     <icons class="fa fa-angle-double-down"></icons>
                 </a>
                     <ul id="sellerSubList">
+                        <a href="store.html" id="storeBtn">Store</a>
                         <a href="AddProducts.html">Add Product</a>
                     </ul>
                 </li>
@@ -67,7 +68,7 @@
 
                 <div class="flex">
                     <p class="price">NT<i class="fas fa-dollar-sign"></i> {{product.price}} </p>
-                    <p class="price">{{product.quantity}} Left</p>
+                    <!-- <p class="price">{{product.quantity}} Left</p> -->
                     <!-- <input type="number" v-model="cart.quantity" name="quantity" required maxlength="2" min="1" value="1" max="99"
                            class="quantity"> -->
                 </div>
@@ -107,6 +108,10 @@
                     userId: "",
                     productId: "",
                     quantity: 1,
+                }, 
+                order: {
+                    userId:"", 
+                    product:""
                 }
             }
         },
@@ -156,6 +161,24 @@
             },
             addToOrder(product) {
                 console.log(product);
+                var _this = this;
+                if ( _this.cart.userId == "") {
+                    Swal.fire("You are not logged in yet, please log in first", "", "error");
+                    setTimeout(function () {
+                        window.location.href = "/login.html";
+                    }, 1500);
+                } else {
+                    this.order.product = product;
+                    axios.post('/orders/addProductToOrder', this.order).then(function (response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            Swal.fire(response.data.message, "", "success");
+                        } else {
+                            Swal.fire(response.data.message, "", "error");
+                        }
+                    });
+                }
             },
             isLogin(event) {
                 const _this = this;
@@ -168,6 +191,7 @@
                         document.getElementById("userSubList").style.display = 'block';
                         _this.username = response.data.data.username;
                         _this.cart.userId = response.data.data.id;
+                        _this.order.userId = response.data.data.id;
 
                         if (response.data.data.type == 1) {
                             document.getElementById("storeBtn").style.display = 'block';
@@ -192,7 +216,7 @@
                     document.getElementById("loginBtn").style.display = 'block';
                     document.getElementById("sellerSubList").style.display = 'none';
                     document.getElementById("storeBtn").style.display = 'none';
-                    location.href = "/home.html";
+                    location.href = "/Products.html";
                 });
             }
 

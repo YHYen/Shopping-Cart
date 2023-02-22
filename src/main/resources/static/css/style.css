@@ -556,7 +556,7 @@ header .fa-bars {
 }
 
 .order-list .flex .btn-container .delete-btn, .update-btn {
-
+    display: block;
     width: 100%;
     text-align: center;
     margin: .3rem;
@@ -630,5 +630,11 @@ header .fa-bars {
 
     .products .box-container {
         grid-template-columns: 1fr;
+    }
+
+    .order-list .flex .btn-container {
+        font-size: .8;
+        width: 80%;
+        flex-wrap: wrap;
     }
 }

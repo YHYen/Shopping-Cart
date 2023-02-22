@@ -28,10 +28,11 @@
             <ul>
                 <li><a href="Products.html">Products</a></li>
                 <li><a href="shoppingCart.html">Shopping Cart</a></li>
-                <li><a href="store.html" class="store" id="storeBtn">Store
+                <li><a href="#" class="store" id="storeBtn">My Store
                     <icons class="fa fa-angle-double-down"></icons>
                 </a>
                     <ul id="sellerSubList">
+                        <a href="store.html" id="storeBtn">Store</a>
                         <a href="AddProducts.html">Add Product</a>
                     </ul>
                 </li>
@@ -201,7 +202,7 @@
                     document.getElementById("loginBtn").style.display = 'block';
                     document.getElementById("sellerSubList").style.display = 'none';
                     document.getElementById("storeBtn").style.display = 'none';
-                    location.href = "/home.html";
+                    location.href = "/Products.html";
                 });
             }
 

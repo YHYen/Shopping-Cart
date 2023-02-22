@@ -31,10 +31,11 @@
             <ul>
                 <li><a href="Products.html">Products</a></li>
                 <li><a href="shoppingCart.html">Shopping Cart</a></li>
-                <li><a href="store.html" class="store" id="storeBtn">Store
+                <li><a href="#" class="store" id="storeBtn">My Store
                     <icons class="fa fa-angle-double-down"></icons>
                 </a>
                     <ul id="sellerSubList">
+                        <a href="store.html" id="storeBtn">Store</a>
                         <a href="AddProducts.html">Add Product</a>
                     </ul>
                 </li>
@@ -115,7 +116,7 @@
                         //3. Registration is successful, jump to the registration page, and display a success message
                         Swal.fire(response.data.message, "", "success");
                         setTimeout(function () {
-                            window.location.href = "/home.html";
+                            window.location.href = "/Products.html";
                         }, 1500);
                     } else {
                         //4. Registration failed, show error message
@@ -164,7 +165,7 @@
                     document.getElementById("username").style.display = 'none';
                     document.getElementById("userSubList").style.display = 'none';
                     document.getElementById("loginBtn").style.display = 'block';
-                    location.href = "/home.html";
+                    location.href = "/Products.html";
                 });
             }
 

@@ -104,7 +104,7 @@
                     if (response.data.flag) {
                         //3. Login successful and jump to the home page
                         setTimeout(function () {
-                            window.location.href = "/home.html";
+                            window.location.href = "/Products.html";
                         }, 10);
                     } else {
                         //4. Login failed, show error meaage
@@ -125,7 +125,7 @@
                         _this.username = response.data.data.username;
                         //3. already login, jump to the home page
                         setTimeout(function () {
-                            window.location.href = "/home.html";
+                            window.location.href = "/Products.html";
                         }, 10);
                     } else {
                         document.getElementById("username").style.display = 'none';
@@ -141,7 +141,7 @@
                     document.getElementById("username").style.display = 'none';
                     document.getElementById("userSubList").style.display = 'none';
                     document.getElementById("loginBtn").style.display = 'block';
-                    location.href = "/home.html";
+                    location.href = "/Products.html";
                 });
             }
         }

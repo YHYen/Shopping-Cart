@@ -41,13 +41,40 @@ public class OrderServiceImpl implements OrderService {
             // Add successfully
             // 2. Add data to order_product_merge table
             Cart cart = order.getCarts().get(0);
-            if (orderMapper.insertOrderProductMergeByUserId(cart.getUserId()) > 0) {
+            if (orderMapper.insertOrderProductMergeFromCartTableByUserId(cart.getUserId()) > 0) {
                 return new Result(true, "Data added successfully");
             }
             return new Result(false, "Add to order_product_merge table failed");
         }
         return new Result(false, "Add to Order failed");
 
+    }
+
+    /**
+     * add order information by one product
+     *
+     * @param order order object containing order information
+     * @return Result whether the order is added successfully and process message
+     * */
+    @Override
+    public Result addProductToOrder(Order order) {
+        // 1. add price info and user info to order table
+        // 1.1 set order data
+        order.setPrice(order.getProduct().getPrice());
+        order.setPayType(1);
+        order.setPaymentStatus(1);
+        order.setShippingStatus(5);
+
+        // 1.2 Add data to order table
+        if(orderMapper.insertOrder(order) > 0) {
+            // Add successfully
+            // 2. add product info and quantity info to product order merge table
+            if (orderMapper.insertOrderProductMergeByProduct(order.getProduct().getId(), 1) > 0) {
+                return new Result(true, "Data added successfully");
+            }
+            return new Result(false, "Add to order_product_merge table failed");
+        }
+        return new Result(false, "Add to Order failed");
     }
 
     /**
