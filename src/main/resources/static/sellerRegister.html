@@ -11,7 +11,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- custom js file link -->
     <script src="js/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -112,13 +113,13 @@
                     //2. determine whether flag is true
                     if (response.data.flag) {
                         //3. Registration is successful, jump to the registration page, and display a success message
+                        Swal.fire(response.data.message, "", "success");
                         setTimeout(function () {
                             window.location.href = "/home.html";
-                        }, 10);
+                        }, 1500);
                     } else {
                         //4. Registration failed, show error message
-                        _this.msgColor = "#ff1900";
-                        _this.errMsg = response.data.message;
+                        Swal.fire(response.data.message, "", "error");
 
                     }
                 });

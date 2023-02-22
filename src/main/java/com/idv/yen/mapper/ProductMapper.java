@@ -80,7 +80,7 @@ public interface ProductMapper {
     @Result(property = "sellerId", column = "seller_id")
     @Result(property = "imagePath", column = "image_path")
     @Select("select " +
-            "   product_name, price, quantity, seller_id, image_path  " +
+            "   id, product_name, price, quantity, seller_id, image_path  " +
             "from " +
             "   tb_product " +
             "where " +

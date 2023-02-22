@@ -11,8 +11,6 @@
     <groupId>com.idv.yen</groupId>
     <artifactId>ShoppingCart</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>ShoppingCart</name>
-    <description>ShoppingCart</description>
     <properties>
         <java.version>17</java.version>
     </properties>

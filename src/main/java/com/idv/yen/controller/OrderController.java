@@ -30,6 +30,9 @@ public class OrderController {
      */
     @PostMapping("/addOrder")
     public Result addOrder(@RequestBody Order order) {
+        if (order.getCarts().isEmpty()) {
+            return new Result(false, "Your shopping cart is empty");
+        }
         // 1. Add data to order and order_product_merge table
         if (orderService.addOrder(order).getFlag()) {
             // Data added successfully

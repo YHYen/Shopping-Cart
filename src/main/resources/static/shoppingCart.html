@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- custom js file link -->
     <script src="js/script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 </head>
@@ -160,54 +161,78 @@
             },
             updateCart(cart) {
                 if (cart.quantity == 0 || cart.quantity > 99) {
-                    console.log("need > 0 and < 99");
-                    retrun;
+                    Swal.fire({
+                        icon: 'error', 
+                        title: 'Item quantity must be between 0 and 99'
+                    });
+                } else {
+                    axios.put('carts/updateCart', cart).then(function (response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            Swal.fire('update Success', "", "success");
+                        } else {
+                            Swal.fire('update fail', "", "error");
+                        }
+                    }).finally(() => {
+                        this.findUserCart();
+                    });
                 }
-                axios.put('carts/updateCart', cart).then(function (response) {
-                    //1. get response data
-                    //2. determine whether flag is true
-                    if (response.data.flag) {
-                        console.log('update Success');
-                    } else {
-                        console.log('update fail');
-                    }
-                }).finally(() => {
-                    this.findUserCart();
-                });
-
             },
             deleteProduct(id) {
-                axios.delete('carts/deleteCart/' + id).then(function (response) {
-                    //1. get response data
-                    //2. determine whether flag is true
-                    if (response.data.flag) {
-                        console.log(response.data.message);
-                    } else {
-                        console.log(response.data.message);
-                    }
-                }).finally(() => {
-                    this.findUserCart();
-                });
+                Swal.fire({
+                    title: 'Are you sure to delete?', 
+                    text: "You won't be able to revert this", 
+                    showCancelButton: true, 
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    axios.delete('carts/deleteCart/' + id).then(function (response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            Swal.fire(response.data.message, "", "success");
+                        } else {
+                            Swal.fire(response.data.message, "", "error");
+                        }
+                    }).finally(() => {
+                        this.findUserCart();
+                    });
+                }) 
             },
             emptyCart() {
                 const _this = this;
-                axios.delete('carts/emptyCart/' + this.userId).then(function (response) {
-                    //1. get response data
-                    //2. determine whether flag is true
-                    if (response.data.flag) {
-                        console.log(response.data.message);
-                    } else {
-                        console.log(response.data.message);
-                    }
-                }).finally(() => {
-                    this.findUserCart();
-                });
+                Swal.fire({
+                    title: 'Are you sure to delete?', 
+                    text: "You won't be able to revert this", 
+                    showCancelButton: true, 
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                }).then((result) => {
+                    axios.delete('carts/emptyCart/' + this.userId).then(function (response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            _this.carts = [];
+                            Swal.fire(response.data.message, "", "success");
+                        } else {
+                            Swal.fire(response.data.message, "", "error");
+                        }
+                    }).finally(() => {
+                        this.findUserCart();
+                    });
+                }) 
+
+                
             },
             countSubTotal(cart) {
                 cart.subTotal = cart.quantity * cart.product.price;
                 // console.log(this.getTotal);
             },
             checkout() {
+                const _this = this;
                 this.order.userId = this.userId;
                 this.order.price = this.getTotal;
                 this.order.carts = this.carts;
@@ -215,9 +240,10 @@
                     //1. get response data
                     //2. determine whether flag is true
                     if (response.data.flag) {
-                        console.log(response.data.message);
+                        _this.carts = [];
+                        Swal.fire(response.data.message, "", "success");
                     } else {
-                        console.log(response.data.message);
+                        Swal.fire(response.data.message, "", "error");
                     }
                 }).finally(() => {
                     this.findUserCart();
@@ -248,8 +274,6 @@
                         document.getElementById("loginBtn").style.display = 'block';
                         _this.username = "Username";
                     }
-
-
                 }).finally(() => {
                     this.findUserCart();
                 });

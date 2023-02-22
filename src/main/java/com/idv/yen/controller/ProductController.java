@@ -1,7 +1,6 @@
 package com.idv.yen.controller;
 
 import com.idv.yen.domain.Product;
-import com.idv.yen.service.ImageService;
 import com.idv.yen.service.ProductService;
 import com.idv.yen.service.Utils.Result;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,7 @@ public class ProductController {
         return productService.addProduct(file, product);
     }
 
-    @DeleteMapping("deleteProduct/{id}")
+    @DeleteMapping("/deleteProduct/{id}")
     public Result deleteProduct(@PathVariable Integer id) {
         return productService.deleteProduct(id);
     }

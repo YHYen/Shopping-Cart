@@ -63,17 +63,28 @@ public class ProductServiceImpl implements ProductService {
         // 1. select Product by product id to get image path
         Product originProduct = productMapper.selectById(id);
 
-        // 2. use image util to delete product image
-        imageUtil = new ImageUtil();
-        imageUtil.imageDelete(originProduct.getImagePath());
-
-        // 4. upload successful, delete product information from database
-        if (productMapper.deleteById(id) > 0) {
-            // 5. delete data successful, return successful message
-            return new Result(true, "Product deleted successfully");
+        // 2. Determine the product exists or not
+        if(originProduct == null) {
+            // 2.1. if product does not exist
+            return new Result(false, "Product does not exist");
         }
-        // 4.1. Failed to delete data into database, return error message
-        return new Result(false, "Failed to delete Product");
+
+        // 3. select successful, delete product information from table
+        try {
+            if (productMapper.deleteById(originProduct.getId()) > 0) {
+                // 3. use image util to delete product image
+                imageUtil = new ImageUtil();
+                imageUtil.imageDelete(originProduct.getImagePath());
+
+                // 5. delete data successful, return successful message
+                return new Result(true, "Product deleted successfully");
+            }
+            // 4.1. Failed to delete data into database, return error message
+            return new Result(false, "Failed to delete Product");
+        } catch (Exception e) {
+            return new Result(false, "Your item has already been purchased and cannot be deleted");
+        }
+
     }
 
     /**

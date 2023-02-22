@@ -10,6 +10,8 @@
     <link rel="stylesheet" href="css/style.css">
     <!-- custom js file link -->
     <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 
@@ -89,20 +91,49 @@
         methods: {
             submitForm(event) {
                 const _this = this;
-                axios.post('/users/register', this.formData).then(function (response) {
-                    //1. get response data
-                    //2. determine whether flag is true
-                    if (response.data.flag) {
-                        //3. Registration is successful, jump to the registration page, and display a success message
-                        location.href = "/login.html";
-                    } else {
-                        //4. Registration failed, show error message
-                        _this.msgColor = "#ff1900";
-                        _this.errMsg = response.data.message;
-                        _this.formData.password = "";
-                        _this.formData.confirmPassword = "";
-                    }
-                });
+                var emailRegxp = /^([\w]+)(.[\w]+)*@([\w]+)(.[\w]{2,3}){1,2}$/;
+                if (this.errMsg == "This username already exists") {
+                    Swal.fire({
+                        icon: 'error', 
+                        title: 'This username already exists', 
+                        text: "Find a name that's cooler than the others"
+                    });
+                } else if (this.formData.email = '') {
+                    Swal.fire({
+                        icon: 'error', 
+                        title: 'You did not fill in the email address', 
+                        text: "Fill in the email address and let us contact you"
+                    });
+                } else if(emailRegxp.test(this.formData.email) != true) {
+                    Swal.fire({
+                        icon: 'error', 
+                        title: 'Email format error'
+                    });
+                } else if (this.formData.password == '' || this.formData.confirmPassword == '') {
+                    Swal.fire({
+                        icon: 'error', 
+                        title: 'Password not filled', 
+                        text: "For security reasons, please fill in"
+                    });
+                } else {
+                    axios.post('/users/register', this.formData).then(function (response) {
+                        //1. get response data
+                        //2. determine whether flag is true
+                        if (response.data.flag) {
+                            //3. Registration is successful, jump to the registration page, and display a success message
+                            Swal.fire(response.data.message, "", "success");
+                            setTimeout(function () {
+                                window.location.href = "/login.html";
+                            }, 1500);
+                        } else {
+                            //4. Registration failed, show error message
+                            _this.msgColor = "#ff1900";
+                            Swal.fire(response.data.message, "", "error");
+                            _this.formData.password = "";
+                            _this.formData.confirmPassword = "";
+                        }
+                    });
+                }
             },
             checkUsername(event) {
                 const _this = this;
@@ -112,10 +143,11 @@
                     let userExists = response.data.flag;
                     if (userExists) {
                         _this.msgColor = "#ff1900";
-                        _this.errMsg = response.data.message;
+                        Swal.fire(response.data.message, "", "success");
                     } else {
                         _this.msgColor = "#38944f";
                         _this.errMsg = response.data.message;
+                        Swal.fire(response.data.message, "", "error");
 
                     }
                 });
