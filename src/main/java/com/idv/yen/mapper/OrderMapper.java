@@ -57,19 +57,23 @@ public interface OrderMapper {
     int insertOrderProductMergeByProduct(Integer productId, Integer quantity);
 
     /**
-     * delete order by id
+     * Delete the child table data (Order Product Merge table) by order id
+     *
+     * @param orderId order id to delete
+     * @return int the number of rows changed in the database
+     * */
+    @Delete("delete from tb_order_product where order_id = #{orderId}")
+    int deleteOrderProductMergeDataByOrderId(Integer orderId);
+
+
+    /**
+     * delete the main table (order table) by order id
      *
      * @param orderId order id to delete
      * @return int the number of rows changed in the database
      */
-    @Delete("delete " +
-            "  TOP.*, o.* " +
-            "from " +
-            "   tb_order_product as TOP, " +
-            "   tb_order as o " +
-            "where " +
-            "   TOP.order_id = #{orderId} AND o.id = #{orderId} ")
-    int deleteByOrderId(Integer orderId);
+    @Delete("delete from tb_order where id = #{orderId}")
+    int deleteOrderDataByOrderId(Integer orderId);
 
 
     /**

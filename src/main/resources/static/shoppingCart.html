@@ -85,7 +85,7 @@
                         <input type="button" value="Update" name="add_to_cart" class="update-btn"
                                @click="updateCart(cart)">
                         <input type="button" value="Delete" name="delete_product" class="delete-btn"
-                               @click="deleteProduct(cart.id)">
+                               @click="deleteProduct(cart)">
                     </div>
                 </div>
             </div>
@@ -180,7 +180,7 @@
                     });
                 }
             },
-            deleteProduct(id) {
+            deleteProduct(cart) {
                 Swal.fire({
                     title: 'Are you sure to delete?', 
                     text: "You won't be able to revert this", 
@@ -189,11 +189,13 @@
                     cancelButtonColor: '#d33',
                     confirmButtonText: 'Yes, delete it!'
                 }).then((result) => {
-                    axios.delete('carts/deleteCart/' + id).then(function (response) {
+                    axios.delete('carts/deleteCart/' + cart.id).then(function (response) {
                         //1. get response data
                         //2. determine whether flag is true
                         if (response.data.flag) {
+                            cart.quantity = 0;
                             Swal.fire(response.data.message, "", "success");
+                            
                         } else {
                             Swal.fire(response.data.message, "", "error");
                         }

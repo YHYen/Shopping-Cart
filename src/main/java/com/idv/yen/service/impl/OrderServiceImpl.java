@@ -79,6 +79,8 @@ public class OrderServiceImpl implements OrderService {
 
     /**
      * delete order data from order table and order_product_merge table by the order id
+     * Because of foreign key bindings.
+     * Therefore,the data in the child table must be deleted before deleting the data from the main table
      *
      * @param orderId the id of the order to delete
      * @return Result whether the order deleted successfully and process message
@@ -86,14 +88,17 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Result deleteOrderById(Integer orderId) {
         // 1. call orderMapper to delete order data from order table and order_product_merge table
-        if (orderMapper.deleteByOrderId(orderId) > 0) {
-            // Both tables are deleted successfully
-            // 2. return successful message
-            return new Result(true, "Order deleted successfully");
+        // 1.1 The child table must be deleted first
+        if (orderMapper.deleteOrderProductMergeDataByOrderId(orderId) > 0) {
+            if (orderMapper.deleteOrderDataByOrderId(orderId) > 0) {
+                // Both tables are deleted successfully
+                // 2. return successful message
+                return new Result(true, "Order deleted successfully");
+            }
+            // Failed to delete, return failure message
+            return new Result(false, "Failed to delete the order from main table");
         }
-
-        // Failed to delete, return failure message
-        return new Result(false, "Failed to delete order");
+        return new Result(false, "Failed to delete the order from child table");
     }
 
     @Override

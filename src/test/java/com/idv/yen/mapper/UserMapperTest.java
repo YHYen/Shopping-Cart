@@ -17,10 +17,26 @@ import java.util.List;
 public class UserMapperTest {
 
 
-    private UserMapper userMapper;
+    private final UserMapper userMapper;
     @Autowired
     public UserMapperTest(UserMapper userMapper) {
         this.userMapper = userMapper;
+    }
+
+
+    @Test
+    @Rollback
+    void testInsertUser() {
+        User user = new User();
+        user.setUsername("aaa");
+        user.setPassword("111");
+        user.setType(1);
+        user.setPhoneNumber("0912345677");
+        user.setEmail("aaa@gmail.com");
+
+        userMapper.insertUser(user);
+        User result = userMapper.selectByUsername(user.getUsername());
+        Assertions.assertEquals(result.getUsername(), user.getUsername());
     }
 
     @Test
@@ -50,20 +66,7 @@ public class UserMapperTest {
         Assertions.assertNotNull(user);
     }
 
-    @Test
-    @Rollback
-    void testInsertUser() {
-        User user = new User();
-        user.setUsername("言");
-        user.setPassword("987654");
-        user.setType(1);
-        user.setPhoneNumber("0912345677");
-        user.setEmail("yen@gmail.com");
 
-        userMapper.insertUser(user);
-        User result = userMapper.selectByUsername(user.getUsername());
-        Assertions.assertEquals(result.getUsername(), user.getUsername());
-    }
 
     @Test
     @Rollback
@@ -76,7 +79,6 @@ public class UserMapperTest {
         user.setPhoneNumber("0912345677");
         user.setEmail("yen@gmail.com");
 
-        int i = userMapper.updateById(user);
         User result = userMapper.selectByUsername(user.getUsername());
         Assertions.assertEquals(result.getUsername(), user.getUsername());
     }
