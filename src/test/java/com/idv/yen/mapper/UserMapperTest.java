@@ -37,15 +37,15 @@ public class UserMapperTest {
 
     @Test
     void testSelectByUsername() {
-        String username = "Xiu";
+        String username = "aaa";
         User user = userMapper.selectByUsername(username);
         Assertions.assertNotNull(user);
     }
 
     @Test
     void testSelectByUsernameAndPassword() {
-        String username = "Xiu";
-        String password = "123321";
+        String username = "aaa";
+        String password = "111";
         User user = userMapper.selectByUsernameAndPassword(username, password);
         Assertions.assertNotNull(user);
     }

@@ -63,12 +63,12 @@ public interface OrderMapper {
      * @return int the number of rows changed in the database
      */
     @Delete("delete " +
-            "   o.*, TOP.* " +
+            "  TOP.*, o.* " +
             "from " +
-            "   tb_order as o ," +
-            "   tb_order_product as TOP " +
+            "   tb_order_product as TOP, " +
+            "   tb_order as o " +
             "where " +
-            "   o.id = #{orderId} AND TOP.order_id = #{orderId}")
+            "   TOP.order_id = #{orderId} AND o.id = #{orderId} ")
     int deleteByOrderId(Integer orderId);
 
 

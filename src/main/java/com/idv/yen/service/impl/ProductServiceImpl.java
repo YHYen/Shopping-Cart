@@ -31,6 +31,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Result addProduct(MultipartFile file, Product product) {
         // 1. use image util to upload product image
+        System.out.println(product);
         imageUtil = new ImageUtil();
         Result uploadResult = imageUtil.imageUpload(file, "/src/main/resources/static/images/product/");
 
