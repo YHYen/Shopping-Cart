@@ -12,13 +12,6 @@
 資料庫的部分則是使用MySQL，並利用Mybatis操作。  
 前端的部分，靜態的RWD頁面主要是使用HTML/CSS完成的。  
 前端向後端傳遞和接收的資料則是選擇利用Vue.js和axios來完成並展示，可以順便了解不同於只使用Ajax研發的差異。  
-
-## 操作影片
-
-
-## 如何使用
-
-
 ## 功能介紹
 ### 前言
 剛開始使用頁面時除了登入頁面、註冊頁面以及產品頁面可以查看外其餘的頁面都將被Interceptor(攔截器)擋掉。  
@@ -32,13 +25,13 @@
 - 密碼以及確認密碼的區塊若是為空，或是兩者不同將會被攔截  
 
 大致的操作狀況如下圖:  
-![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/register_AdobeExpress.gif)
+![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/register.gif)
 
 ### 登入
 接著是登入，在註冊完成後，將會直接跳轉過來。輸入已註冊好的帳號密碼即可，這邊同樣有帳號密碼的驗證。  
 
 大致操作如下圖:  
-![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/login_AdobeExpress.gif)
+![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/login.gif)
 
 ### 加入購物車
 在登入之後，會自動跳轉產品頁面。在這邊，剛才未登入時不能做的操作已經可以使用了。主要的操作包含:
@@ -53,7 +46,7 @@
 - 將購物車內容變為訂單(這個操作將會清空購物車)
 
 大致操作如下圖:  
-![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/shoppingCart_AdobeExpress.gif)
+![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/shoppingCart.gif)
 
 ### 訂單
 在訂單頁面，將會把所有已購買的商品添加到訂單中(包含在產品頁面直接購買的產品)，不同時間添加的商品，其訂單將會有所區分。  
@@ -62,7 +55,7 @@
 - 訂單的刪除
 
 大致操作如下圖:   
-![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/order_AdobeExpress.gif)
+![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/order.gif)
 
 ### 成為賣家
 完成訂單的操作後，這個專案的第二種使用者，我設定為賣家，相對於買家，成為賣家通常需要一些資料進行申請，例如: 身分證照片。  
@@ -78,7 +71,7 @@
 - 刪除商品  
 
 大致流程如下圖:   
-![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/seller_AdobeExpress.gif)
+![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/seller.gif)
 
 ### 新增商品頁面
 成為賣家後，上方欄將會增加商店頁面的連結，包含賣家的商店頁面以及新增商品兩個選項。  
@@ -89,7 +82,8 @@
 在所有操作結束後，右上角使用者icon的下拉式選單中有登出按鈕，按下後將會回到商品頁面，並且消除使用者session，回到登入前狀態。
 
 ## 資料庫設計
-在這邊將展現這個專案的各個資料表以及其關連，關聯圖如下: 
+在這邊將展現這個專案的各個資料表以及其關連，關聯圖如下:  
+![This is an image](https://github.com/YHYen/Shopping-Cart/blob/master/src/displayed%20pictures/%E8%B3%87%E6%96%99%E8%A1%A8%E8%A8%AD%E8%A8%88.png)
 
 ## 資料夾說明
 - 後端的程式碼都放在 src\main\java\com\idv\yen的目錄下  
